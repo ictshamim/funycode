@@ -1,0 +1,113 @@
+---
+title: String in C
+category: Basic C Programming
+author: Anonymous
+tags: ["#c", "#tutorial"]
+thumbnailText: C Programming Tutorial-28
+date: 2021-03-04
+---
+## String in C
+A string is a sequence of characters. Any sequence or set of characters defined within double quotation symbols is a constant string. As the integer is stored in integer array , in the same way character  is stores in character array. Character array is often called as “string”.
+
+- In c it is required to do some meaningful operations on strings they are:
+   - Reading string displaying string
+   - Combining or concatenating string
+   - Copying one string to another
+   - Comparing string & checking whether they are equal
+   - Extraction of a portion of a string
+- Strings are stored in memory as ASCII codes of characters that make up the string appended with ‘\0’(ASCII value of null).
+- Normally each character is stored in one byte, successive characters are stored in successive bytes. Strings are used to store text information and to perform manipulations on them.
+- Strings are declared in the same manner as other arrays.
+## Declaring a string
+- C does not support string as the data type. However is allows us to represent strings as character arrays. It can be declared as –
+~~~js
+char string_name[size];
+~~~
+- Here char is character data type.
+- This is must for specifying the data type as string.
+
+- string_name is the valid variable name given to the string and ‘size’ determines the number of characters in the string. For example:
+~~~js
+char star[10];
+char book[13];
+char phone[ ];
+~~~
+### Analysis
+- Here ‘star’ is the character array or a string that can store up to 10 elements of type char. It can be represented as:
+~~~js
+char star[10];
+[0] [1] [2] [3] [4] [5] [6] [7] [8] [9]
+~~~
+- However star can also store shorter sequences than 10 characters. Similarly ‘book’ can store 13 characters. It can be represented as
+~~~js
+[0] [1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13]
+char phone[ ];
+~~~
+- Here phone array does not have size specified.
+- This initializes an upsized character array, phone, with a string constant.
+- Later when the compiler sees the statement, it will figure out the total memory space needed to hold the string constant plus an extra null character added by the compiler itself and allocates the memory space.
+
+## Initializing a String
+- Strings can be initialized at compile time and at run time. The process of initializing the strings at compile time is to write the string literal within double quotes. Compile time initialization is called as static initialization. Compile time initialization can be done in three ways. They are given below.
+~~~js
+Type 1. char name[9] = “Sri Rama”;
+Type 2. char stream[7] = {`H', `e', `l', `l', `o', `!', `\0'};
+Type 3. char str[] = "I like C.";
+~~~
+## String Initialization Type 1
+- Consider a character array name that is initialized with a string constant
+~~~
+“Mr JOHN”. This is written as char name[9] = “Mr JOHN”;
+~~~
+- Here null (\0) is appended by the compiler at the end string to denote that it is end of given string.
+- The compiler can automatically append a null character (\0) to the end of the array and treat the character array as a character string.
+
+~~~
+char str1[4] = "text"; /* illegal declaration*/
+~~~
+- Here the array str1 has size 4. This it cannot hold a string constant plus an extra null character and above declaration is considered illegal.
+
+- Note that many C compilers will not issue a warning or an error message on this incorrect declaration. The runtime errors that could eventually arise as a result could be very difficult to debug.
+
+## String Initialization Type 2
+- A character array can also be declared and initialized like this:
+~~~js
+char stream[6] = {`H', `e', `l', `l', `o', `!'}; /* char array*/
+~~~
+This same array can be declared as string when null(\0) is appended at the end by user and array size is made sufficient to hold all characters.
+- This is shown below.
+
+~~~js
+char stream[7] = {`H', `e', `l', `l', `o', `!', `\0'};/*string */
+~~~
+- You can also initialize the above a character array stream can be initialized with a string constant “Hello! “. For example,
+~~~js
+char str[7] = "Hello!";
+~~~
+- The compiler can automatically append a null character (\0) to the end of the array, and treat the character array as a character string.
+
+### String Initialization Type 3
+- The third type of initialization is not specifying the array size. For example,
+~~~js
+char str[] = "I like C.";
+~~~
+- This statement initializes an character array, str, with a string constant.” I like c. “
+- Later when the compiler sees the statement, it will figure out the total memory space needed to hold the string constant plus an extra null character added by the compiler itself.
+
+## Initialization after Declaration
+~~~js
+char s[10] = " Web Design";
+is not the same as
+char s[10];
+s = "Web Design"; /*Illegal declaration. */
+~~~
+- This generates a compiler error.
+- The assignment operator cannot be used with a string already declared.
+
+## String Constants versus Character Constants
+- A string constant is a series of characters enclosed in double quotes (” “). On the other hand, a character constant is a character enclosed in single quotes (` `). When a character variable ch and a character array str are initialized with the same character,x, such as the following,
+~~~js
+char ch = `x';
+char str[] = "x";
+~~~
+- One byte is reserved for the character variable ch, and two bytes are allocated for the character array str. The reason that an extra byte is needed for str is that the compiler has to append a null character to the array.

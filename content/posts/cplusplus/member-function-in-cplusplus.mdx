@@ -1,0 +1,234 @@
+---
+title: Member Function In Cplusplus
+category: Cplusplus Programming
+author: Anonymous
+tags: ['#C++', '#tutorial']
+date: 2021-01-16
+thumbnailText: C++ Tutorial-16
+---
+## Member Function in C++
+A function is a self contained block of code written once for a particular purpose but can be used again and again. A function is a basic entity for C programming language. Even the execution of our program starts from main function. They are the basic building blocks for modular programming. Depending upon parameters and return type functions are classified into four categories :
+
+1. No return type and no arguments/parameters.
+2. No returns type but arguments/parameters.
+3. Return type but no arguments/parameters.
+4. Return type with arguments/parameters.
+
+## Member Function
+- Member functions can be defined in two places are outside the class definition and inside the class definition.
+- It is obvious that, irrespective of the place of definition, the function should perform the same task.
+- Therefore, the code for the function body would be identical in both the cases.
+- However, there is a subtle difference in the way the function header is defined.
+## Outside the Class Definition
+- Member functions that are declared inside a class have to be defined separately outside the class. Their definitions are very much like the normal functions.
+- They should have a function header and a function body.
+- Since C++ does not support the old version of function definition, the ANSI prototype form must be used for defining the function header.
+- An important difference between a member function and a normal function is that a member function incorporates a membership ‘identity label’ in the header.
+- This ‘label’ tells the compiler which class the function belongs to. The general form of a member function definition is
+~~~js
+return-type class-name :: function-name (argument declaration)
+{
+Function body
+}
+~~~
+- The membership label class-name :: tells the compiler that the function function-name belongs to the class class-name.
+- That is, the scope of the function is restricted to the class-name specified in the header line.
+- The symbol :: is called the scope resolution operator.
+## Inside the Class Definition
+- Another method of defining a member function is to replace the function declaration by the actual function definition inside the class. For example, we could define the item class as follows:
+~~~js
+class item
+    {
+    int number;
+    float cost;
+    public:
+    void getdata(int a, float b); // declaration
+    // inline function
+    void putdata(void) // definition inside the class
+        {
+        cout << number << “\n”;
+        cout << cost << “\n”;
+        }
+    };
+~~~
+- When a function is defined inside a class, it is treated as an inline function.
+- Therefore, all the restrictions and limitations that apply to an inline function are also applicable here.
+- Normally, only small functions are defined inside the class definition.
+## Constant Member Function
+- A constant member function is a member function of class which is made constant by placing keyword const at the end of function declaration and definition both.
+
+- The main property of const member function is that you cannot modify the values of data members as we may get the compilation error.
+- The general syntax of a constant member function is, assume this is inside the class.
+
+~~~js
+return_type func_name ( ) const
+    {
+    Body of the function;
+    }
+~~~
+- If declared in class defined outside the class, it will look like as :
+~~~js
+return_type func_name ( ) const; //declaration
+return_type class_name ( ) : : func_name ( ) const
+    {
+    function definition;
+    }
+~~~
+### Example1: Write a C++ program to demonstrate class and object where function are declared and defined inside the class.
+~~~js
+//Write a C++ program to demonstrate class and object.
+#include<iostream>
+using namespace std;
+class demo
+    {
+    private :
+    int cx,cy;
+    public :
+    void input_data(int x,int y)
+        {
+        cx=x;
+        cy=y;
+        }
+    void show_data( )
+        {
+        cout<<"cx="<<cx<<"\t"<<"cy="<<cy<<endl;
+        }
+    };
+int main( )
+    {
+    demo d1;
+    d1.input_data(10,20);
+    d1.show_data( );
+    }
+~~~
+~~~
+Output:
+cx=10 cy=20
+~~~
+### Example2: Write a C++ program to demonstrate class and object where function are declared and defined outside the class.
+~~~js
+//Write a C++ program to demonstrate class and object where function are declared and defined outside the class.
+#includeMember functions can be defined in two places are outside the class definition and inside the class definition.
+using namespace std;
+class demo
+    {
+    private :
+    int cx,cy;
+    public :
+    void input_data(int x,int y);
+    void show_data( );
+    };
+void demo :: input_data(int x,int y)
+    {
+    cx=x;
+    cy=y;
+    }
+void demo :: show_data( )
+    {
+    cout<<"cx="<<cx<<"\t"<<"cy="<<cy<<endl;
+    }
+int main( )
+    {
+    demo d1;
+    d1.input_data(10,20);
+    d1.show_data( );
+    }
+~~~
+~~~
+Output:
+cx=10 cy=20
+~~~
+### Example3: Write a C++ program to demonstrate class and object where function are declared and defined inside/outside the class with one object.
+~~~js
+// Write a C++ program to demonstrate class and object where function are declared and defined inside/outside the class.
+#include
+using namespace std;
+
+class Rectangle {
+    int width, height;
+    public:
+    void set_values (int,int);
+    int area() {
+        return width*height;
+    }
+    };
+
+void Rectangle::set_values (int x, int y) {
+    width = x;
+    height = y;
+    }
+
+int main () {
+    Rectangle rect;
+    rect.set_values (3,4);
+    cout << "area: " << rect.area();
+    return 0;
+    }
+~~~
+~~~
+Output:
+area: 12
+~~~
+### Example-4: Write a C++ program to demonstrate class and object where function are declared and defined inside/outside the class with two object.
+~~~js
+// Write a C++ program to demonstrate class and object where function are declared and defined inside/outside the class.
+#include<iostream>
+using namespace std;
+
+class Rectangle {
+    int width, height;
+    public:
+    void set_values (int,int);
+    int area () {
+        return width*height;
+       }
+    };
+
+void Rectangle::set_values (int x, int y) {
+    width = x;
+    height = y;
+    }
+
+int main () {
+    Rectangle rect, rectb;
+    rect.set_values (3,4);
+    rectb.set_values (5,6);
+    cout << "rect area: " << rect.area() << endl;
+    cout << "rectb area: " << rectb.area() << endl;
+    return 0;
+    }
+~~~
+~~~
+Output:
+rect area: 12
+rectb area: 30
+~~~
+### Example5: Write a C++ program to demonstrate the constant member function.
+~~~js
+//Write a C++ program to demonstrate the constant member function.
+#includeMember functions can be defined in two places are outside the class definition and inside the class definition.
+using namespace std;
+class demo
+    {
+    int num;
+    public :
+    void input (int x)
+        {
+        num=x;
+        }
+    void change ( )const
+        {
+        num=num*10;
+        }
+    };
+int main( )
+    {
+    demo d;
+    d.input(20);
+    d.change( );
+    }
+~~~
+~~~
+Output:
+error: assignment of member 'demo::num' in read-only object|
+~~~

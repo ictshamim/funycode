@@ -1,0 +1,208 @@
+---
+title: Pointer Initialization and Declaration C
+category: Basic C Programming
+author: Anonymous
+tags: ["#c", "#tutorial"]
+thumbnailText: C Programming Tutorial-32
+date: 2021-02-28
+---
+## Pointer Initialization and Declaration
+In C every variable must be declared before it is used. Since pointer is a special variable, its declaration is also different. An operator called dereference operator or indirection operator is used to declare a Pointer. It is represented by *(asterisk). The ‘*’ symbol appears in C language in four different situations with four different meanings. Two of these are well known.
+
+1. Comments/*…*/
+
+2. Arithmetic operator for multiplication as in a*b
+
+3. Declaring pointer variable using *(dereference operator)
+
+Usage of deference operator in comment can be easily recognized. Multiplication needs two operands; this can also be easily recognized. When it appears in a declaration as int *p, read it is read as p is a pointer to an integer. The syntax of pointer declaration is
+~~~
+data-type *variable-name;
+~~~
+- Here data type can be int, float, char etc and the dereference operator before the int variable variable-name tells that it is a pointer variable.
+- Hence the pointer variable variable-name holds the address of another variable of the same data type.
+- For example, A pointer is declared by assigning an asterisk (*) in front of the variable name in the declaration statement.
+~~~js
+int x; /* define x */
+int *ptr; /* define a pointer to x */
+int *p; p is a pointer to an integer.
+~~~
+- Similarly pointer to char and float can be declared
+~~~js
+char *q; q is a pointer to a char.
+float *fp; fp is a pointer to float.
+~~~
+## Pointer Declaration Styles
+- The dereference operator (*) can appear anywhere between the data type name and the pointer variable name as shown below.,
+~~~js
+int * p; /*style 1 between the data type and variable*/
+int *p; /*style 2 Close to varible*/
+int* p; /*style 3 close to data type.*/
+Multiple pointers of same data type can be declared as given below.
+
+int *p, x, *q;
+Here p and q are pointer variables and x is integer variable.
+~~~
+## Pointer Initialization
+- To initialize the pointer variable reference operator (&) is used with pointer variable. To understand different types of initialization consider the following examples,
+~~~js
+int i, j, *p;
+p = &i;
+int x;
+int*ptr;
+ptr=&x; /*Address of x is assigned to pointer variable*/
+*ptr=&x;/*The value of x is assigned to ptr */
+~~~
+## Access variable using pointer
+- Once a pointer has been assigned address of a variable, the value of that variable can be accessed using the pointer. This is done by using unary operator * (asterisk) usually known as indirection operator, dereferencing operator or ‘contain of’ operator.
+~~~js
+For example:
+
+int marks,*p,n;
+marks=79;
+p=&marks;
+n=*p;
+~~~
+- The first line declares marks and n as integer variables and p as a pointer variable pointing to an integer.
+- The second line assigns value 79 to variable marks and
+- The third line assigns address of variable marks to pointer p.
+- The fourth line contains indirection operator *.
+- When * is placed before a pointer variable in an expression, the pointer returns value of the variable of pointer.
+- In above case *p returns value of variable marks because p contains the address of marks.
+- The * can be remembered as ‘value at address’. Thus value of n would be 79.
+~~~js
+p=&marks;
+n=*p;
+is equivalent to:
+n=*&marks
+~~~
+## Pointer Arithmetic Operation
+
+- Like other variables pointer variables can be used in arithmetic operations.
+~~~js
+Example:
+int *p, x=10;
+p = &x;
+*p=*p+5;
+This statement with add the value 5 in the value pointed by p.
+~~~
+- Integer pointers are incremented or decremented in the multiples of 2. Similarly character by 1, float by 4 and long pointers by 8 etc.
+~~~js
+p++; /* valid */
+~~~
+- We cannot add or subtract one pointer from another. Example:
+~~~js
+int *p1, *p2;
+p1 = p1 + p2; /* invalid */
+~~~
+- We can add or subtract the constant from pointer variable. In this case value of pointer is incremented or decremented by the scaling factor of respective data type. Example:
+~~~js
+p = p + 2; /* valid */
+~~~
+## Multiplication and Division on pointers
+
+- The value stored at pointers Address can be added or subtracted by any constant value. Example:
+~~~js
+*p = *p * 4; /* valid */
+~~~
+- We cannot use two pointers for multiplication or division. That is,
+~~~js
+x = x * y;
+x = x / y;
+is not allowed.
+~~~
+- We cannot multiply or divide a pointer by constant. Example:
+~~~js
+p = p * 4; /* invalid */
+p = p / 2; /* invalid */
+~~~
+### Example-1: Write a C program to illustrate pointer arithmetic.
+~~~js
+//Write a C program to illustrate pointer arithmetic.
+/*pointer arithmetic*/
+#include<stdio.h>
+main()
+    {
+    int x;
+    int*ptr1,*ptr2;
+    x=10;
+    ptr1=&x;
+    ptr2=ptr1+6;
+    printf(“ Value of x=%d\n“,x);
+    printf(“Value pointed by ptr1 =%d\n “,*ptr1);
+    printf(“ Address of x pointed by ptr1=%d\n“, ptr1);
+    printf(“Content of ptr2=(ptr1+6)is =%u “,ptr2);
+    printf(“Value pointed by ptr1=%d “, *ptr2);
+    }
+~~~
+~~~
+OUTPUT:
+Value pointed by ptr1=10
+Address of x pointed by ptr1=00785614
+Content of ptr2=(ptr1+6)is = 0078561A
+Value pointed by ptr2=8A/* let he value at location 0078561A be 8A */
+~~~
+## Pointer increment and decrement
+- Integer, float, char, double data type pointers can be incremented and decremented. For all these data types both prefix and post fix increment or decrement is allowed. Integer pointers are incremented or decremented in the multiples of two. Similarly character by one, float by four and double pointers by eight etc.
+~~~js
+Let int*p;
+P++ /*valid*/
+++p /*valid*/
+p-- /*valid*/
+--p /*valid*/
+~~~
+### Example-2: Write a C program to illustrate pointer increment operator.
+~~~js
+//Write a C program to illustrate pointer increment operator.
+#include<stdio.h>
+main()
+    {
+    int *p1,p;
+    float *f1,f;
+    char *c1,c;
+    p1=&p;
+    f1=&f;
+    c1=&c;
+    printf(“Memory address before increment:\n
+    int=%p\n,float=%p\n, char=%p\n“,p1,f1,c1);
+    p1++;
+    f1++;
+    c1++;
+    printf(“Memory address after increment:\n int=%p\n, float=%p\n,
+    char=%p\n“,p1,f1,c1);
+    }
+~~~
+~~~
+Output:
+Memory address before increment:
+int=0045AF19 /*int Occupies two bytes*/
+float=0045AF2B /*float occupies four bytes*/
+char= 0045AF3E /*character occupies one byte*/
+Memory address after increment:
+int=0045AF1B
+float=0045AF2F
+char= 0045AF3F
+~~~
+### Example-3: Write a C program to illustrate pointer increment operator.
+~~~js
+//Write a C program to illustrate pointer increment operator.
+#include<stdio.h>
+main( )
+    {
+    int x;
+    int *p;
+    x=1000;
+    p=&x;
+    printf(“Pointer value = %d\n”,p);
+    printf(“Pointer plus one =%d\n”,p+1);
+    }
+~~~
+~~~
+Output:
+Pointer value = 22F455
+Pointer plus one = 22F439
+~~~
+### Analysis:
+- 223455+1=223439! That is pointer magic! How does C justify that? Well, 223455 is not just a number, C knows it is the address of an integer that takes 4 locations.
+- So 223455,223456, 223457 and 223458 are all together held by the integer. So C interprets +1 as next free location and gives the answer 223459.
+- Remember that it need not be continuation of memory location, when a pointer is incremented.

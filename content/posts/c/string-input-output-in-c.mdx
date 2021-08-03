@@ -1,0 +1,94 @@
+---
+title: String Input/Ouput in C
+category: Basic C Programming
+author: Anonymous
+tags: ["#c", "#tutorial"]
+thumbnailText: C Programming Tutorial-29
+date: 2021-03-03
+---
+## Data Input/output in String
+This is also called as run time initialization. The integers, character and float data types are read by using functions such as scanf(), gets, etc. Similarly, to read a string two functions are used. They are
+
+1. scanf()
+2. gets()
+## Reading Strings Using scanf ( )
+- To read strings using scanf() format specifier %s is used with the function scanf().For example
+~~~js
+char name[10];
+~~~
+- To input data in to char array ’name’, scanf function and %s is used as given below.
+~~~js
+scanf("%s",name);
+~~~
+- Note that the %s format specifier doesn’t require the ampersand (&) symbol before the variable name.
+- The major limitation of scanf() is that it reads until occurrence of first separator a white space characters such as space character, tab or new line and store it into given variable.
+- For example if the input literal is “How are you?”. Then the scanf statement will read only the word ‘How’ into the variable name.
+- To overcome this limitation, gets() and getchar() functions are used.
+## Reading Strings using gets( )
+- The gets() functions reads the string from the keyboard including spaces until the enter key is not pressed. The getchar() function is used to get a single charater. The gets() and getchar() functions are defined in stdio.h library file. For example
+~~~js
+char line[100];
+printf("Enter a line:\n");
+gets(line);
+puts("Entered input is :\n");
+puts(line);
+~~~
+- The gets() function keeps reading characters from the standard input stream until a new line character or end-of-file is encountered.
+- Instead of saving the new line character, the gets() function appends a null character to the array that is referenced by the argument to the gets() function.
+## Print strings
+- To out put data of the given string two functions are used. They are
+
+1. printf()
+
+2. puts ()
+
+## Printing strings using printf()
+- The printf statement along with format specifier %s is used to print strings on the screen. The format %s can be used to display an array of characters that is terminated by the null character. For example,
+~~~js
+printf(“%s”, name);
+~~~
+- It can be used to display the entire contents of the array name.
+- Printf expects to receive a string as an additional parameter when it sees %s in the format string.
+- This additional parameter
+
+   – Can be from a character array.
+
+   – Can be another literal string.
+
+   – Can be from a character pointer
+
+- Printf knows how much to print out because of the NULL character at the end of all strings. When printf() encounters a null\0, it stops printing. The string variable can be printed out with precision using printf() statement.
+
+## Printing strings using puts( )
+- The puts function is a much simpler output function than printf for string printing. Prototype of puts is defined in stdio.h For example:
+~~~js
+char sentence[] = "This is strings in C \n";
+puts(sentence);
+This Prints out:
+This is strings in C
+~~~
+- Consider a simple program to understand string input and output functions.
+~~~js
+#include<stdio.h>
+main()
+    {
+    char str[80] ; Char str2[45];
+    printf("Enter a string: ") ;
+    gets(str1) ;
+    printf("Enter another string: ") ;
+    scanf(“%s“,str2); /*Reads upto first white space character*/
+    Printf(“output of first string:\n”);
+    printf("%s" , str1\n);
+    Printf(“output of second string:\n”);
+    puts(“str2 “)
+    }
+~~~
+~~~
+Output:
+Input:
+Enter a string: This is c language.
+Enter another string: This is strings
+Output:
+Output of first string: This is c language
+Output of second string: This
+~~~

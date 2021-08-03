@@ -1,0 +1,213 @@
+---
+title: File Handling in C
+category: Basic C Programming
+author: Anonymous
+tags: ["#c", "#tutorial"]
+thumbnailText: C Programming Tutorial-36
+date: 2021-02-24
+---
+## File Handling in C
+### Built in Function
+In order to perform the file operations in C we must use the high level I/O functions which are in C standard I/O library. They are
+
+## getc() and putc() functions
+
+- getc()/fgetc() : It is used to read a character from a file that has been opened in a read mode.
+- It reads a character from the file whose file pointer is fp. The file pointer moves by one character for every operation of getc(). The getc() will return an end-of –marker EOF, when an end of file has been reached.
+~~~
+Syntax: getc(fp);
+Ex: char ch;
+ch=getc(fp);
+putc()/fputc()
+~~~
+- It is used to write a character contained in the character variable to the file associated with the FILE pointer fp. fputc() also returns an end-of –marker EOF, when an end of file has been reached.
+~~~js
+Syntax: putc(c,fp);
+Example: char c;
+putc(c,fp);
+~~~
+
+### Example-1: Write a C program to implement fgetc() and fputc() function in file.
+~~~js
+// Write a C program to implement fgetc() and fputc() function in file.c() and fputc():
+#include<stdio.h>
+void main()
+    {
+    FILE *fp;
+    char ch;
+    fp=fopen("input1.txt","w");
+    printf("\n enter some text hereand press cntrl D or Z to stop :\n");
+    while((ch=getchar())!=EOF)
+        fputc(ch,fp);
+    fclose(fp);
+    fp=fopen("input1.txt","r");
+    printf("\n The entered text is : \n");
+    while((ch=fgetc(fp))!=EOF)
+        putchar(ch);
+    fclose(fp);
+    }
+~~~
+
+## fprintf() and fscanf()
+
+- In order to handle a group of mixed data simultaneously there are two functions that are fprintf() and fscanf().
+- These two functions are identical to printf and scanf functions, except that they work on files.
+- The first argument of these functions is a file pointer which specifies the file to be used.
+~~~
+fprintf(): The general form of fprintf() is
+Syntax: fprintf(fp,”control string”,list);
+~~~
+- where fp is a file pointer associated with a file that has been opened for writing .
+- The control string contains output specifications for the items in the list. .
+~~~
+Example: fprintf(fp,”%s%d”,name,age);
+fscanf() : It is used to read a number of values from a file.
+Syntax: fscanf(fp,”control string”,list);
+Example: fscanf(fp2,”%s %d”,item,&quantity);
+~~~
+- like scanf , fscanf also returns the number of items that are successfully read. when the end of file is reached it returns the value EOF.
+
+### Example-2: Write a C program to implement fscanf() and fprintf() function in file.
+~~~js
+//Write a C program to implement fscanf() and fprintf() function in file.
+#include<stdio.h>
+void main()
+    {
+    int a=22,b;
+    char s1[20]="Welocme_to_c",s2[20];
+    float c=12.34,d;
+    FILE *f3;
+    f3=fopen("mynew3","w");
+    fprintf(f3,"%d %s %f",a,s1,c);
+    fclose(f3);
+    f3=fopen("mynew3","r");
+    fscanf(f3,"%d %s %f",&b,s2,&d);
+    printf("\n a=%d \t s1=%s \t c=%f \n b=%d \t s2=%s \t d=%f",a,s1,c,b,s2,d);
+    fclose(f3);
+    }
+~~~
+## getw() and putw()
+
+- The getw() and putw()are integer oriented functions .They are similar to the getc() and putc() functions and are used to read and write integer values .
+- These functions would be useful when we deal with only integer data. The general form of getw() and putw() are
+~~~js
+Syntax: putw(integer,fp);
+Syntax: getw(fp);
+~~~
+### Example-3: Write a C program to implement getw() and putw() function in file.
+~~~js
+//Write a C program to implement getw() and putw() function in file.
+/*Printing odd numbers in odd file and even numbers in even file*/
+#include<stdio.h>
+void main()
+    {
+    int x,i;
+    FILE *f1,*fo,*fe;//creating a file pointer
+    f1=fopen("anil.txt","w"); //opening a file
+    printf("\n enter some numbers into file or -1 to stop \n");
+    for(i=0;i<20;i++)
+        {
+        scanf("%d",&x);
+        if(x== -1)break;
+        putw(x,f1); //writing read number into anil.txt file one at a time
+        }
+    fclose(f1); //closing a file opened for writing input
+    printf("\n OUTPUT DATA\n");
+    f1=fopen("anil.txt","r");//open anil in read mode to read data
+    fo=fopen("odd3f","w");
+    fe=fopen("even3f","w");
+    while((x=getw(f1))!=EOF)
+        {
+        printf("%d\t",x);
+        if(x%2==0)
+            putw(x,fe);
+        else
+            putw(x,fo);
+        }
+    fcloseall();
+    fo=fopen("odd3f","r");
+    printf("\n contents of odd file are :\n");
+    while((x=getw(fo) )!= EOF)
+        printf(" %d\t",x);
+    fe=fopen("even3f","r");
+    printf("\n contents of even file are :\n");
+    while((x=getw(fe)) != EOF)
+        printf(" %d\t",x);
+    fcloseall();
+    }
+~~~
+
+## fputs() and fgets()
+
+- fgets(): It is used to read a string from a file pointed by file pointer.
+- It copies the string to a memory location referred by an array.
+~~~js
+Syntax: fgets(string,length,filepointer);
+Example: fgets(text,50,fp1);
+~~~
+- fputs(): It is used to write a string to an opened file pointed by file pointer.
+~~~
+Syntax: fputs(string,filepointer);
+Example: fputs(text,fp);
+~~~
+### Exampe-4: Write a C program to implement fgets() and fputs() function in file.
+~~~js
+//Write a C program to implement fgets() and fputs() function in file.
+#include<stdio.h>
+void main()
+    {
+    FILE *fp;
+    char str[50];
+    fp=fopen("fputget.txt","r");
+    printf("\n the read string is :\n");
+    fgets(str,50,fp);
+    puts(str);
+    fclose(fp);
+    fp=fopen("fputget.txt","a+");
+    printf("\n Enter string : \n");
+    gets(str);
+    fputs(str,fp);
+    puts(str);
+    fclose(fp);
+    }
+~~~
+## fread() and fwrite()
+
+- fwrite(): It is used for writing an entire structure block to a given file in binary mode.
+
+~~~
+Syntax: fwrite(&structure variable,sizeof(structure variable),1,filepointer);
+Example: fwrite(&stud,sizeof(stud),1,fp);
+~~~
+- fread(): It is used for reading an entire structure block from a given file in binary mode.
+~~~js
+Syntax: fread(&structure variable,sizeof(structure variable),1,filepointer);
+Example: fread(&emp,sizeof(emp),1,fp1);
+~~~
+### Example-5: Write a C program to implement fread() and fwrite() function in file.
+~~~js
+//Write a C program to implement fread() and fwrite() function in file.
+#include<stdio.h>
+struct player
+    {
+    char pname[30];
+    int age;
+    int runs;
+    };
+void main()
+    {
+    struct player p1,p2;
+    FILE *f3;
+    f3=fopen("player.txt","w");
+    printf("\n Enter details of player name ,age and runs scored :\n ");
+    fflush(stdin);
+    scanf("%s %d %d",p1.pname,&p1.age,&p1.runs);
+    fwrite(&p1,sizeof(p1),1,f3);
+    fclose(f3);
+    f3=fopen("player.txt","r");
+    fread(&p2,sizeof(p2),1,f3);
+    fflush(stdout);
+    printf("\nPLAYERNAME:=%s\tAGE:=%d\tRUNS:=%d ",p2.pname,p2.age,p2.runs);
+    fclose(f3);
+    }
+~~~

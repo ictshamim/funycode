@@ -1,0 +1,192 @@
+---
+title: Friend Function In Cplusplus
+category: Cplusplus Programming
+author: Anonymous
+tags: ['#C++', '#tutorial']
+date: 2021-01-14
+thumbnailText: C++ Tutorial-18
+---
+## Friend Function in C++
+A friend function is totally a new concept in C++. As the name implies it will be a friend someone. We can make a function as a friend of a class and can allow that friend function to access private and public data members of that class. Friend functions are mostly used where two or more classes want to share a common function. We present a number of points about friend functions.
+
+- First of all friend is keyword. A friend function is created by placing the keyword friend in the function declaration but not in function definition. Exception is if you declare and define at the same place.
+- A friend function is a friend of the class in which it is declared.
+- A friend function is not a member function of the class and cannot be called from any object of the class using dot operator.
+- A friend function can have full access to the public, private and protected data member of the class to which it is a friend.
+- The arguments of friend functions are usually objects of the class to which it is a friend.
+- A friend function not being a member function of class is called as a normal function.
+- A friend function can be friend of more than one class.
+- A function of one class can be a friend of another class.
+- We can have whole class as a friend of another class
+- We use friend function usually with multiple classes but can used with single class also.
+- A friend function can be declared in the public or private visibility mode without affecting its meaning.
+- There can be any number of friend functions of a class.
+- The general syntax of creating a friend function as a friend class is :
+~~~js
+class demo
+    {
+    data members :
+    public :
+    members functions;
+    // friend function declaration
+    friend data_type function_name (parameters);
+    };
+data_type function_name (parameters)
+//definition
+    {
+    function definition;
+    }
+~~~
+
+## Demerits of Friend Function
+- Friend function cannot access the class members and functions directly, they need to have a class object which using dot can call the members of the class.
+- Creating friend classes and functions defy the idea of encapsulation and create exception in the ways of data hiding.
+- Usages of many friend functions some times make you think to redesign your program.
+- Friend functions are conceptually messy and potentially lead to spaghetti-code situations as numerous friend functions muddy the clear boundaries between classes.
+
+### Example-1: Write a C++ program to find the square of a number using friend function.
+~~~js
+//Write a C++ program to find the square of a number using friend function.
+#include<iostream>
+using namespace std;
+class demo
+    {
+    int fx;
+    public :
+    void inputf(int x)
+        {
+        fx=x;
+        }
+    friend int findsqr(demo);
+    };
+int findsqr(demo d)
+    {
+    return d.fx * d.fx;
+    }
+int main( )
+    {
+    demo F;
+    F.inputf(30);
+    cout<<"Square is="<<findsqr(F);
+    }
+~~~
+~~~
+Output:
+Square is=900
+~~~
+### Example-2: Write a C++ program to convert lower case string to uppercase using friend function and single class implementation.
+~~~js
+//Write a C++ program to convert lower case string to uppercase using friend function and single class implementation.
+#include<iostream>
+#include<string.h>
+using namespace std;
+class demo
+    {
+    char str[15];
+    public :
+    void inputf(char s[ ])
+        {
+        strcpy(str,s);
+        }
+    friend char* toupper(demo d)
+        {
+        static char temp[15];
+        strcpy(temp,strupr(d.str));
+        return temp;
+        }
+    };
+int main( )
+    {
+    demo F;
+    F.inputf("hari mohan");
+    cout<<"String in upper case \n";
+    cout<<toupper(F);
+    };
+~~~
+~~~
+Output:
+String in upper case
+HARI MOHAN
+~~~
+### Example-3: Write a C++ program to find the maximum number from two number of different class implementation.
+~~~js
+//Write a C++ program to find the maximum number from two number of different class implementation.
+#include<iostream>
+#include<string.h>
+using namespace std;
+class second;
+class first
+    {
+    int fx;
+    public :
+    void inputf(int x)
+        {
+        fx=x;
+        }
+    friend void findmax(first,second);
+    };
+class second
+    {
+    int sx;
+    public :
+    void inputs(int x)
+        {
+        sx = x;
+        }
+    friend void findmax(first,second);
+    };
+void findmax(first A, second B)
+    {
+    if(A.fx>B.sx)
+      cout<<A.fx<<"of class first is greater than "<<B.sx<<"of class second\n";
+    else
+     cout<<B.sx<<"of class second is greater than"<<A.fx<<"of class first\n";
+    }
+int main( )
+    {
+    first F;
+    second S;
+    F.inputf(40);
+    S.inputs(70);
+    findmax(F,S);
+    }
+~~~
+~~~
+Output:
+70 of class second is greater than 40 of class first
+~~~
+## Example-4: Write a C++ program to implement the whole class as a friend of another class.
+~~~js
+//Write a C++ program to implement the whole class as a friend of another class.
+#include<iostream>
+#include<string.h>
+using namespace std;
+class second;
+class first
+    {
+    public :
+    void silly( )
+        {
+        cout<<"IN SILLY OF FIRST CLASS "<<endl;
+        }
+    friend class second;
+    };
+class second
+    {
+    public :
+    void show(first s)
+        {
+        s.silly( );
+        }
+    };
+int main( )
+    {
+    second s;
+    first f;
+    s.show(f);
+    }
+~~~
+~~~
+Output:
+IN SILLY OF FIRST CLASS
+~~~

@@ -1,0 +1,151 @@
+---
+title: Inline Function In Cplusplus
+category: Cplusplus Programming
+author: Anonymous
+tags: ['#C++', '#tutorial']
+date: 2021-01-15
+thumbnailText: C++ Tutorial-17
+---
+## Inline Function in C++
+Inline functions are functions which are expanded inline. To make a function inline we simple put keyword inline before the functions definitions.
+
+- These functions are different from normal functions that in normal function call control is transferred to the place where the actual function definition is written.
+- For example, consider the following dummy code of the program:
+~~~js
+void main( )
+    {
+    void show( );
+        statements;
+    show( ); //function called here
+        statements; // next statement where function returns
+    statements;
+    }
+void show( )
+    {
+    statements;
+    }
+~~~
+- During the execution of the program when function call show is encountered, compiler saves the state of various registers, variables occurred in the program prior to function call show.
+- It also saves the address of the next instruction after the function call show as it has to return to this statement when function show returns.
+- All these are saved onto the stack as stack-frame or activation record.
+- Inline function is not work in the way as explained above manner. They are expanded where they are called.
+- That is the whole body of the inline function is put at the place where function was called.
+- This saves time as there is no control transfer, no saving and popping back from stack-frame.
+- So inline function executes faster than normal function. But at the place of inline function call, the code is expanded.
+- If you have called inline function from 100 places in your program, the code will be expanded 100 places in your program thus increasing program size.
+- So a trade-off between program size and execution efficiency is there. The general syntax of defining the inline functions as:
+~~~js
+inline return type function_name (parameters)
+    {
+    function definition;
+    }
+~~~
+## Some Important Points About Inline Function
+- Inline function is a request to the compiler thus inline function may not work as inline some times.
+- In this regard they differ from macro, which work as macro always.
+- Inline function executes faster than normal function.
+- Strict type checking is performed for variables that are passed as arguments, which is not done in case of macro.
+- Inline function does not produce side effects whereas macro does.
+- All inline functions must be defined prior to their use.
+- Inline function does not work as inline when code contains loops, recursions, goto, switch, static variable etc.
+- They are used where function definition are small so calling cost and overhead for normal functions can be minimized.
+## Critical situations for inline function
+- If a loop, a switch or a goto exists in function body.
+- If function is not returning any value.
+- If function contains static variables.
+- If function is recursive.
+
+### Example-1: Write a C++ program to illustrate inline function.
+~~~js
+//Write a C++ program to illustrate inline function.
+#include<iostream>
+using namespace std;
+inline void show( )
+    {
+    cout<<"Hello from inline show\n";
+    }
+int main( )
+    {
+    show( );
+    }
+~~~
+~~~
+Output:
+Hello from inline show
+~~~
+## Explanation
+- The function show is inline so when it is called in the main it is simply expanded in the main.
+- That is, all the statements written in the function show appear at the place of function call.
+- Here we are having just one cout statement so it appear through we have written cout statement within main itself similar to macro.
+### Example-2: Write a C++ program to find the square of a number using inline function.
+~~~js
+//Write a C++ program to find the square of a number using inline function.
+#include<iostream>
+using namespace std;
+inline int square(int x)
+    {
+    return x*x;
+    }
+int main( )
+    {
+    int num,snum;
+    cout<<"Enter a number \n";
+    cin>>num;
+    cout<<"Square of "<<num<<"is "<<square(num)<<endl;
+    }
+~~~
+~~~
+Output:
+Enter a number
+20
+Square of 20is 400
+~~~
+
+### Example-3: Write a C++ program to find the cube of a number using inline function.
+~~~js
+//Write a C++ program to find the cube of a number using inline function.
+#include<iostream>
+using namespace std;
+inline int cube(int x)
+    {
+    return x*x*x;
+    }
+int main( )
+    {
+    int num;
+    cout<<"Enter a number \n";
+    cin>>num;
+    cout<<"Cube of "<<num<<"is "<
+    }
+~~~
+~~~
+Output:
+Enter a number
+5
+Cube of 5 is 125
+~~~
+### Example-4: Write a C++ program to enter two number and find the maximum number using inline function.
+~~~js
+//Write a C++ program to enter two number and find the maximum number using inline function.
+#include<iostream>
+using namespace std;
+inline int max(int x,int y)
+    {
+    return x>y ? x :y;
+    }
+int main( )
+    {
+    int n1,n2;
+    cout<<"Enter two numbers \n";
+    cin>>n1>>n2;
+    int m=max(n1,n2);
+    cout<<"Max="<<m<<endl;
+    }
+~~~
+~~~
+Output:
+Enter two numbers
+12
+45
+Max=45
+~~~

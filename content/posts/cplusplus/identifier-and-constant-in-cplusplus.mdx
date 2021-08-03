@@ -1,0 +1,150 @@
+---
+title: Identifier, Constant in Cplusplus
+category: Cplusplus Programming
+author: Anonymous
+tags: ['#C++', '#tutorial']
+date: 2021-01-26
+thumbnailText: C++ Tutorial-06
+---
+
+## Identifier and Constant (Literal) in C++
+Identifiers refer to the names of variables, functions, arrays, classes etc., created by the programmer. Each language has its own rules for naming these identifiers.
+
+- Every programming language has certain rules for defining the names of variables, functions, classes, etc. Such names are known as identifiers.
+- C++ follows almost the same set of rules for defining an identifier as C does.
+- It can be a sequence of one or more characters including underscore symbol (_). Example – Barlength or Bar_length are valid names.
+- There should be no white (blank) spaces in an identifier. It should be a single word.
+- Bar length is invalid. Box volume is invalid while Boxvolume or Box_volume are valid.
+- There should be no marked character in the identifier
+![Fig: Identifier in C++ ](../../assets/cppPic/cid.jpg)
+- There is no limit on length of name in C++. However, in C it is limited to 32 characters. Better have a check on the compiler you are using.
+- Identifier should never start with a digit. It should always start with an alphabet or underline symbol, however, digits can be part of identifier. 2A is invalid while A2 and _2A are valid.
+- It should not have any other symbol except alphabets, digits and underscore symbol.
+   - Example- Newdelhi_2 is valid but Newdelhi-2 or Newdelhi(2) are invalid identifiers.
+- It must not be a keyword of C++. Thus double or int are invalid identifiers while Double or Int or INT are valid identifiers.
+- Besides the keywords the specific reserved words for the compiler should not be used as identifiers.
+- The alternative representations of some operators of C++ also should not be used as identifiers. These 11 words are given below. and, and_eq, bitand, bitor, compl, not, not_eq, or, or_eq, xor, xor-eq
+## Constant (Literal)
+- Constants are expressions with a fixed value.
+- C++ supports all literals supported by C, though there are some additional ones as well.
+- Literals are used to express particular values within the source code of a program.
+- In C++, it is possible to define L’A’ as a wide character constant.
+- This constant is wide, that is, it is of 16-bit storage rather than the normal 8-bit ASCII (hence L precedes ‘A’).
+- Using wide characters, it is possible to accommodate characters in the unicode format.
+- Some languages such as Chinese and Japanese have thousands of characters, which do not conform to the small footprint of ASCII.
+- The unicode format enables C++ to read, print, and store characters of such languages.
+- The constant L’A’ is actually of type wchar_t, which is an addition to the C++ standard.
+- Literal constants can be divided in Integer Numerals, Floating-Point Numerals, Characters, Strings and Boolean Values.
+## Integer Numerals
+- The following are numerical constants that identify integer decimal values.
+~~~
+1776
+707
+-273
+~~~
+- Notice that to express a numerical constant we do not have to write quotes (“) nor any special character.
+- There is no doubt that it is a constant: whenever we write 1776 in a program, we will be referring to the value 1776.
+- In addition to decimal numbers (those that all of us are used to use every day) C++ allows the use as literal constants of octal numbers (base 8) and hexadecimal numbers (base 16).
+- If we want to express an octal number we have to precede it with a 0 (zero character).
+- And in order to express a hexadecimal number we have to precede it with the characters 0x (zero, x). For example, the following literal constants are all equivalent to each other:
+~~~
+75 // decimal
+0113 // octal
+0x4b // hexadecimal
+~~~
+- All of these represent the same number: 75 (seventy-five) expressed as a base-10 numeral, octal numeral and hexadecimal numeral, respectively.
+- Literal constants, like variables, are considered to have a specific data type.
+- By default, integer literals are of type int. However, we can force them to either be unsigned by appending the u character to it, or long by appending l:
+~~~
+75 // int
+75u // unsigned int
+75l // long
+75ul // unsigned long
+
+~~~
+- In both cases, the suffix can be specified using either upper or lowercase letters.
+## Floating Point Numbers
+- They express numbers with decimals and/or exponents.
+- They can include either a decimal point, an e character (that expresses “by ten at the Xth height”, where X is an integer value that follows the e character), or both a decimal point and an e character:
+
+~~~
+3.14159 // 3.14159
+6.02e23 // 6.02 x 10^23
+1.6e-19 // 1.6 x 10^-19
+3.0 // 3.0
+~~~
+- These are four valid numbers with decimals expressed in C++.
+- The first number is PI, the second one is the number of Avogadro, the third is the electric charge of an electron (an extremely small number) -all of them approximated- and the last one is the number three expressed as a floating-point numeric literal.
+## Character and string literals
+- There also exist non-numerical constants, like:
+~~~
+'z'
+'p'
+"Hello world"
+"How do you do?"
+~~~
+- The first two expressions represent single character constants, and the following two represent string literals composed of several characters.
+- Notice that to represent a single character we enclose it between single quotes (‘) and to express a string (which generally consists of more than one character) we enclose it between double quotes (“).
+## Boolean literals
+- There are only two valid Boolean values: true and false.
+- These can be expressed in C++ as values of type bool by using the Boolean literals true and false.
+## Defined constants (#define)
+- You can define your own names for constants that you use very often without having to resort to memory-consuming variables, simply by using the #define preprocessor directive. Its format is:
+## #define identifier value
+For example:
+~~~
+#define PI 3.14159
+#define NEWLINE '\n'
+~~~
+- This defines two new constants: PI and NEWLINE. Once they are defined, you can use them in the rest of the code as if they were any other regular constant.
+### Example-1: Write a C ++ program to calculate circumference using defined constant.
+~~~js
+//Write a C ++ program to calculate circumference using defined constant.
+#include<iostream>
+using namespace std;
+#define PI 3.14159
+#define NEWLINE '\n'
+int main ()
+    {
+    double r=5.0; // radius
+    double circle;
+    circle = 2 * PI * r;
+    cout << circle;
+    cout << NEWLINE;
+    return 0;
+    }
+~~~
+~~~
+Output:
+31.4159
+~~~
+### Example-2: Write a C ++ program to define integer, float and character constant and print them.
+~~~js
+//Write a C ++ program to define integer, float and character constant and print them.
+#include<iostream>
+#define val 100
+#define floatVal 40.5
+#define charVal 'Gt'
+using namespace std;
+    int main()
+    {
+    cout<<"Integer Constant:"<<val;
+    cout<<"\nFloating point Constant:"<<floatVal;
+    cout<<"\nCharacter Constant: \n"<<charVal;
+    return 0;
+    }
+~~~
+~~~
+Output:
+Integer Constant: 100
+Floating point Constant: 40.5
+Character Constant: Gt
+Declared constants (const)
+~~~
+- With the const prefix you can declare constants with a specific type in the same way as you would do with a variable:
+~~~
+const int pathwidth = 100;
+const char tabulator = '\t';
+~~~
+- Here, pathwidth and tabulator are two typed constants.
+- They are treated just like regular variables except that their values cannot be modified after their definition.

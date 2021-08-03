@@ -1,0 +1,206 @@
+---
+title: Destructor In Cplusplus
+category: Cplusplus Programming
+author: Anonymous
+tags: ['#C++', '#tutorial']
+date: 2021-01-11
+thumbnailText: C++ Tutorial-21
+---
+## Destructor in C++
+A destructor is a member function of the class whose name is same as the name of the class but the preceded with tilde sign (~). The purpose of destructor is to destroy the object when it is no longer needed or goes out of scope. The syntax of destructor is given below-
+~~~js
+~className( )
+{
+cout<<”Destructor called “<<endl;
+}
+~~~
+## Features of Destructor
+
+- The name is same as of class but proceeded with a ~ sign.
+- Destructor is automatically called as soon as an object goes out of scope.
+- Destructor is used to destroy the objects.
+- Once a destructor is called for a object, the object will no longer be available for the future reference.
+- Destructor can be used for housekeeping work such as closing the file, de-allocating the dynamically allocated memory etc.
+- Closing a file in destructor is a good idea as user might forget to close the file associated with object.
+- But as the object goes out of scope destructor will be called and all code written in destructor executes which will always result in closing the file and no data loss may be there.
+- When new is used for allocation of memory in the constructor we must always use delete in the destructor to be allocate the memory.
+- Similar to constructor there is no return type for destructor and that’s why they cannot return any value.
+- There is no explicit or implicit category for a destructor.
+- They are always called implicitly by the compiler.
+- Destructor can never take any arguments.
+- Destructor can be virtual
+## Example-1: Write a C++ program to illustrates the basic concept of constructor and destructor.
+~~~js
+//Write a C++ program to illustrates the basic concept of constructor and destructor.
+#include<iostream>
+using namespace std;
+class demo
+    {
+    public :
+    demo( )
+    {
+        cout<<"Constructor called\n";
+    }
+    ~demo( )
+    {
+        cout<<"Destructor called"<<endl;
+    }
+    };
+int main( )
+    {
+    demo d;
+    }
+~~~
+~~~
+Output:
+Constructor called
+Destructor called
+~~~
+### Explanation
+- When demo d; executes it calls the default constructor of the class and results in printing Constructor called.
+- The scope of object d is the area/place where it is available and in the above program the scope is the whole main function.
+- Being the only statement demo d; in the function main, as soon as compiler finds ending brace of main i.e.,} it calls destructor of the class to destroy the object d and prints Destructor called.
+## Example-2: Write a C++ program to illustrates that the destructor has been invoked implicitly by the compiler.
+~~~js
+//Write a C++ program to illustrates that the destructor has been invoked implicitly by the compiler.
+#include<iostream>
+using namespace std;
+int count=0;
+class test
+    {
+    public:
+    test()
+    {
+    count++;
+        cout<<"\n\nConstructor Msg: Object number "<<count<< "created..";
+    }
+    ~test()
+    {
+        cout<<"\n\nDestructor Msg: Object number "<<count<<"destroyed..";
+        count--;
+    }
+    };
+int main()
+    {
+    cout<<"Inside the main block..";
+    cout<<"\n\nCreating first object T1..";
+    test T1;
+        {
+        //Block 1
+        cout<<"\n\nInside Block 1..";
+        cout<<"\n\nCreating two more objects T2 and T3..";
+        test T2,T3;
+        cout<<"\n\nLeaving Block 1..";
+        }
+    cout<<"\n\nBack inside the main block..";
+    return 0;
+    }
+~~~
+~~~
+Output:
+Inside the main block..
+Creating first object T1..
+Constructor Msg: Object number 1created..
+Inside Block 1..
+Creating two more objects T2 and T3..
+Constructor Msg: Object number 2created..
+Constructor Msg: Object number 3created..
+Leaving Block 1..
+Destructor Msg: Object number 3destroyed..
+Destructor Msg: Object number 2destroyed..
+Back inside the main block..
+~~~
+### Example-3: Write a C++ program to illustrates an example of destructor which makes use of block as scope.
+~~~js
+//Write a C++ program to illustrates an example of destructor which makes use of block as scope.
+#include<iostream>
+using namespace std;
+class demo
+    {
+    static int count;
+    public :
+    demo( )
+        {
+        cout<<"Object created "<<++count<<endl;
+        }
+    ~demo( )
+        {
+        cout<<"Object Destroyed"<<count--<<endl;
+        }
+    };
+int demo :: count;
+int main( )
+    {
+    cout<<"I am in main \n";
+    demo d1;
+        {
+        cout<<"In block 1\n";
+        demo d2;
+            {
+            cout<<"In block 2 inside block 1\n";
+            demo d3;
+            }
+        }
+    {
+    cout<<"In block 3\n";
+    demo d4;
+    }
+    cout<<"Exiting main\n";
+    }
+~~~
+~~~
+Output:
+I am in main
+Object created 1
+In block 1
+Object created 2
+In block 2 inside block 1
+Object created 3
+Object Destroyed3
+Object Destroyed2
+In block 3
+Object created 2
+Object Destroyed2
+Exiting main
+Object Destroyed1
+~~~
+
+### Example-4: Write a C++ program to  demonstrates how a destructor releases the memory allocated to an object.
+~~~js
+//Write a C++ program to  demonstrates how a destructor releases the memory allocated to an object.
+#include<iostream>
+using namespace std;
+class test
+    {
+    int *a;
+    public:
+    test(int sizee)
+        {
+        a = new int[sizee];
+        cout<<"\n\nConstructor Msg: Integer array of size "<<sizee<<" created..";
+        }
+    ~test()
+        {
+        delete a;
+        cout<<"\n\nDestructor Msg: Freed up the memory allocated for integer array";
+        }
+    };
+int main()
+    {
+    int s;
+    cout<<"Enter the size of the array..";
+    cin>>s;
+    cout<<"\n\nCreating an object of test class..";
+    test T(s);
+    cout<<"\n\nPress any key to end the program..";
+    return 0;
+    }
+~~~
+~~~
+Output:
+Enter the size of the array..5
+Creating an object of test class..
+Constructor Msg: Integer array of size 5 created..
+Press any key to end the program..
+Destructor Msg: Freed up the memory allocated for integer array
+~~~

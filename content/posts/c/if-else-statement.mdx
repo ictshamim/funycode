@@ -1,0 +1,143 @@
+---
+title: If – Else statement in C
+category: Basic C Programming
+author: Anonymous
+tags: ["#c", "#tutorial"]
+thumbnailText: C Programming Tutorial-15
+date: 2021-03-17
+---
+## If – Else statement in C
+The If – else statement contains a condition. It is logically evaluated.
+
+- In an if…else statement, if the code in the parenthesis of the if statement is true, the code inside its brackets is executed.
+- But if the statement inside the parenthesis is false, all the code within the else statement’s brackets is executed instead.
+- Else clause is optional.
+- The statement under if or else part can be single or [multiple statements](https://en.wikibooks.org/wiki/C_Programming/Statements).
+- If multiple statements are used, they must be embraced with the braces.
+## Flow Diagram
+The flow of control using if…else statement is determined as follows:
+![ Fig: Flow Diagram of If Else Statement in C](../../assets/cPic/if-1.png)
+- Whenever if…else statement is encountered, first the condition is tested. It returns either true or false.
+- If the condition is true, the control enters into the true statement block. Once, the end of true statement block is reached, the control transfers to outside of if statement block without considering else-body.
+- If the condition is false, the control enters into the false statement block by skipping true statement block.
+- Once, the end of false statement block is reached, the control transfers to outside of if statement block.
+## Syntax of If-Else Statement
+The if-else statement is an extended version of [If](https://funycode.com/if-statement/). if…else statement is used to make a decision based on two choices. The general form is as follows:
+```js
+if (test-expression)
+{
+    True block of statements
+}
+Else
+{
+    False block of statements
+}
+Statements;
+```
+## Explanation
+- In this type of a construct, if the value of test-expression is true, then the true block of statements will be executed.
+- If the value of test-expression if false, then the false block of statements will be executed.
+- In any case, after the execution, the control will be automatically transferred to the statements appearing outside the block of If.
+### Example-1 :Write a program to check a given number is odd or even.
+```js
+/* program to check given number is either odd or even*/
+#include<studio.h>
+main()
+    {
+    int num;
+    printf("Enter the number to check: ");
+    scanf ("%d", &num);
+    if ( (num%2) == 0)
+        printf("The given number %d is even",num);
+    else
+        printf("The given number %d is odd",num);
+    }
+```
+```
+Output:
+Enter a number to check: 23
+The given number 23 is odd
+```
+### Example-2: Write a program to enter a number and check weather it less or greater than 100.
+
+```js
+//Write a program to enter a number and check weather it less or greater than 100.
+#include<studio.h>
+int main()
+    {
+    int num;
+    Printf("Enter a Number:");
+    scanf("%d",&num);
+    if(num<100)
+    {
+     printf("The value is less than 100");
+    }
+    else
+    {
+     printf("The value is greater than 100");
+    }
+    return 0;
+    }
+```
+```
+Output:
+Enter a number: 150
+The value is greater than 150
+```
+### Example-3: Write a C program to enter a age and check weather he/she is eligible to vote or not.
+```js
+//Write a C program to enter a age and check weather he/she is eligible to vote or not.
+#include<studio.h>
+int main()
+    {
+    int age;
+    printf("Enter your age:");
+    scanf("%d",&age);
+    if(age>=18)
+        {
+        printf("Congratulations, You are completely eligible to vote");
+        }
+    else
+        {
+        printf("Sorry ... you can't vote");
+        }
+    }
+```
+```
+Output:
+Enter a age: 21
+Congratulations, You are completely eligible to vote
+```
+### Example-4: Write a C program to enter a age and check weather he/she is retired or not.
+```js
+//Write a C program to enter a age and check weather he/she is retired or not.
+#include<studio.h>
+int main()
+    {
+    int age;
+    printf("Enter age\n");
+    scanf("%d",&age);
+    if(age>=55)
+        printf("The person is retired\n");
+    else
+        printf("The person is not retired\n");
+    }
+```
+```
+Output:
+Enter age: 65
+The person is retired
+```
+## Important Note:
+- The group of statements after the if up to and not including the else is called an ‘if block’. Similarly, the statements after the else form the ‘else block’.
+- Notice that the else is written exactly below the if. The statements in the if block and those in the else block have been indented to the right. This formatting
+convention is followed throughout the book to enable you to understand the working of the program better.
+- Had there been only one statement to be executed in the if block and only one statement in the else block we could have dropped the pair of braces.
+- As with the if statement, the default scope of else is also the statement immediately after the else. To override this default scope a pair of braces as shown
+in the above example must be used.
+## Difference Between If and If-Else Statement
+- if statement checks a condition and executes a set of statements when this condition is true, it does not do anything when the condition is false.
+- if-else statement checks a condition and executes a set of statements when this condition is true, it executes another set of statements when the condition is false.
+
+
+
