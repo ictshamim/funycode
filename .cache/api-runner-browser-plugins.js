@@ -9,7 +9,7 @@ module.exports = [{
       options: {"plugins":[]},
     },{
       plugin: require('../../packages/blog/gatsby-blog-core/gatsby-browser.js'),
-      options: {"plugins":[]},
+      options: {"plugins":[],"collectionPostsPerPage":12},
     },{
       plugin: require('../../node_modules/gatsby-plugin-web-font-loader/gatsby-browser.js'),
       options: {"plugins":[],"google":{"families":["Inter:400,600,700,900&display=swap"]}},

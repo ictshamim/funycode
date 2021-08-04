@@ -10,20 +10,19 @@ module.exports = {
       options: {
         // You can add multiple tracking ids and a pageview event will be fired for all of them.
         trackingIds: [
-          "G-PLG90FD7W8", // Google Analytics / GAss
+          "G-BSM2QQRET8", // Google Analytics / GAss
                ],
 
         // This object is used for configuration specific to this plugin
         pluginConfig: {
           // Puts tracking script in the head instead of the body
           head: true,
-
-
       },
     },
       resolve: '@elegantstack/gatsby-theme-flexiblog-education',
       options: {
         // Add theme options here
+        collectionPostsPerPage:12,
       }
     }
   ],
