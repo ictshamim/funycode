@@ -1,3 +1,4 @@
+require('dotenv').config()
 module.exports = {
   pathPrefix: "/funycode",
   flags: {
@@ -5,26 +6,28 @@ module.exports = {
   },
   plugins: [
     {
-
       resolve: `gatsby-plugin-google-gtag`,
       options: {
         // You can add multiple tracking ids and a pageview event will be fired for all of them.
         trackingIds: [
-          "G-BSM2QQRET8", // Google Analytics / GAss
-               ],
-
+          "G-4V0JJW8TDB", // Google Analytics / GA
+        ],
         // This object is used for configuration specific to this plugin
         pluginConfig: {
           // Puts tracking script in the head instead of the body
           head: true,
+
+        },
       },
     },
+
+    {
       resolve: '@elegantstack/gatsby-theme-flexiblog-education',
       options: {
         // Add theme options here
         collectionPostsPerPage:12,
       }
-    }
+    },
   ],
 
 
@@ -34,9 +37,9 @@ module.exports = {
     title: 'Funycode',
     name: 'Funycode',
     description: 'My site description...',
-    address: 'New York, NY',
-    email: 'email@example.com',
-    phone: '+1 (888) 888-8888',
+    address: 'Dhaka, Bangladesh',
+    email: 'ictshamim@yahoo.com',
+    phone: '+88010101010',
 
     //Site Social Media Links
     social: [
@@ -62,16 +65,20 @@ module.exports = {
       },
       {
         name: 'C Programming',
-        slug: '/category/basic-c-programming/'
+        slug: '/category/basic-c-tutorial/'
       },
       {
         name: 'C++',
-        slug: '/category/cplusplus-programming/'
+        slug: '/category/cplusplus-tutorial/'
       },
 
       {
         name: 'Java',
-        slug: '/category/java/'
+        slug: '/category/java-tutorial/'
+      },
+      {
+        name: 'Programming Exercise',
+        slug: '/category/programming-exercise/'
       },
 
     ],

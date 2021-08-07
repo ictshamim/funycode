@@ -1,4 +1,8 @@
 var plugins = [{
+      name: 'gatsby-plugin-google-gtag',
+      plugin: require('C:/Users/User/WebstormProjects/flexiblog-react-gatsby-blog-template/@elegantstack/node_modules/gatsby-plugin-google-gtag/gatsby-ssr'),
+      options: {"plugins":[],"trackingIds":["G-4V0JJW8TDB"],"pluginConfig":{"head":true}},
+    },{
       name: 'gatsby-plugin-mdx',
       plugin: require('C:/Users/User/WebstormProjects/flexiblog-react-gatsby-blog-template/@elegantstack/node_modules/gatsby-plugin-mdx/gatsby-ssr'),
       options: {"plugins":[],"extensions":[".mdx",".md"],"gatsbyRemarkPlugins":[{"resolve":"gatsby-remark-images","options":{"maxWidth":1140,"quality":75,"showCaptions":true,"linkImagesToOriginal":false,"disableBgImageOnAlpha":true}},{"resolve":"gatsby-remark-embed-video","options":{"width":800}},{"resolve":"gatsby-remark-responsive-iframe"},{"resolve":"gatsby-remark-copy-linked-files"},{"resolve":"gatsby-remark-smartypants"}],"remarkPlugins":[null],"defaultLayouts":{},"lessBabel":false,"rehypePlugins":[],"mediaTypes":["text/markdown","text/x-markdown"],"root":"C:\\Users\\User\\WebstormProjects\\flexiblog-react-gatsby-blog-template\\@elegantstack\\gatsby_eductation"},

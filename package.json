@@ -4,7 +4,6 @@
 	"version": "3.4.0",
 	"scripts": {
 		"deploy": "gatsby build --prefix-paths && gh-pages -d public",
-
 		"develop": "gatsby develop",
 		"start": "gatsby develop",
 		"build": "gatsby build",
@@ -12,8 +11,11 @@
 		"serve": "gatsby serve"
 	},
 	"dependencies": {
+		"@elegantstack/gatsby-blog-algolia": "*",
 		"@elegantstack/gatsby-theme-flexiblog-education": "*",
+		"dotenv": "^10.0.0",
 		"gatsby": "^3.7.2",
+		"gatsby-plugin-algolia": "^0.22.0",
 		"gatsby-plugin-google-gtag": "^3.10.0",
 		"gh-pages": "^3.2.3",
 		"react": "^17.0.2",
