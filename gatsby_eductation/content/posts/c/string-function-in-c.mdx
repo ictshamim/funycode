@@ -1,0 +1,282 @@
+---
+title: String Function in C
+category: Basic C Tutorial
+author: Anonymous
+tags: ["#c", "#tutorial"]
+thumbnailText: C Programming Tutorial-30
+date: 2021-03-02
+---
+## String Function in C
+C does not provide any operators for string. Because of this C has built in string functions in its library.
+
+- C library supports a large number of string handling functions that can be used to perform many of the string manipulations.
+- Some of the string functions are given below.
+- To do all the operations described here it is essential to include string.h library header file in the program. Some of the String Functions in string.h.
+   - strcpy(str1,str2)       copies str2 to str1 including the null (\0).
+
+   - strcat(str1,str2)       Appends str2 to end of string str1
+
+   - strlen(string)          Returns the length of string. Does not include the null(\0)
+
+   - strcmp(str1,str2)       Compares str1 with str2 returns integer result.If str1 Returns a positive integer when str1>str2.
+
+   - Strncpy(str1,str2,n)    It copies at most n characters of str2 to str1.If str2 has fewer than n characters, it pads str1 with null(‘\o’) characters.
+
+   - Strchr(string,char)     Locates the position of the first occurrence of char within string and returns the address of the characterif it finds. and null if not.For ex-(“ Hello”,’l’)
+
+   - strlwr()                converts all characters in a string from uppercase to lowercase.
+
+   - strupr()                converts all characters in a string from lower case to uppercase.
+
+   - strcpy() function       C does not allow you to assign the characters to a string directly.For example as in the statement name=”Java”; Instead use the strcpy() function. The strcpy() function works almost like a string-assignment operator. The syntax of the function is
+
+   - strcpy(string1,string2); Strcpy() function assigns the contents of string2 to string1.The string2 may be a character array variable or a string constant.
+
+   - strcpy(city1, city2);   This will assign the contents of the string variable city2 to the string variable city1.The size of the array city1 should be large enough to receive the contents of city2, if not compiler will lodge an error.
+
+## strcat() function
+- The process of appending the characters of one string to the end of other string. Is called concatenation. The strcat() function joins two strings together.
+
+## strcat(string1,string2)
+- Here string1 & string2 are character arrays. When the function strcat is executed string2 is appended to string1.The string at string2 remains unchanged. Example
+~~~js
+strcpy(string1,”Web”);
+strcpy(string2,”Mining”);
+Printf(“%s”, strcat(string1,string2);
+~~~
+- From the above program segment the value of string1 becomes webmining. The string at str2 remains unchanged as mining. The variation in this function is strn(str1,str2,n) .This concatenates the n integer letters to str1. For example,
+~~~js
+strncat(stri,name,4);
+~~~
+- This concatenates first 4 letters of string name to string stri.
+
+## strlen() function
+- This function counts and returns the number of characters in a string. The length does not include a null character. The syntax is
+~~~js
+n=strlen(string);
+Where n is integer variable, which receives the value of length of the string.
+~~~
+~~~js
+Example:
+int len;
+len=strlen(“Coral Draw”);
+~~~
+- Here the integer variable len will store the value 10 which is the length of given sting.
+
+## strcmp() function
+- In c the values of two strings cannot be directly compare in a condition like if(string1==string2).
+- The strcmp() function is used for this purpose.
+- This function returns a zerovalue if two strings are equal, or a non zero number if the strings are not the same.
+- This returns a negative if the string1 is alphabetically less than the second and a positive number if the string is greater than the second.
+- The syntax of strcmp() is given below:
+~~~js
+Strcmp(string1,string2)
+~~~
+- String1 & string2 may be string variables or string constants.
+~~~js
+Example:
+strcmp(“Book”,”Book”) will return zero because 2 strings are equal.
+
+strcmp(“their”,”there”) will return a 9 which is the numeric difference between ASCII ‘i’ and ASCII ’r’.
+
+strcmp(“The”, “the”) will return 32 which is the numeric difference between ASCII “T” & ASCII “t”.
+~~~
+## strcmpi() function
+- This function is same as strcmp() which compares 2 strings but not case sensitive.
+~~~js
+ For example
+strcmpi(“THE”, ”the”); will return 0.
+~~~
+## strlwr () function
+- This function converts all characters in a string from uppercase to lowercase. The syntax is
+~~~js
+strlwr(string);
+For example:
+
+strlwr(“APPLICATION”) converts the string to application
+~~~
+## strupr() function
+- This function converts all characters in a string from lower case to uppercase. The syntax is
+
+## strupr(string);
+- For example strupr(“application”) will convert the string to APPLICATION.
+## C Character Functions
+- Apart from string functions C has character functions.
+- These functions are defined in ctype.h library file.
+- Some of the character functions are given below.
+- All the following function will Return true if
+
+   - int isalpha(c);                            c is a letter.
+
+   - int isupper(c);                            c is an upper case letter.
+
+   - int islower(c);                            c is a lower case letter.
+
+   - int isdigit(c);                              c is a digit [0-9].
+
+   - int isxdigit(c);                            c is a hexadecimal digit [0-9A-Fa-f].
+
+   - int isalnum(c);                            c is an alphanumeric character (c is a letter or a digit);
+
+   - int isspace(c);                             c is a SPACE, TAB, RETURN, NEWLINE, FORMFEED,
+
+   - int ispunct(c);                             c is a punctuation character (neither control nor alphanumeric).
+
+   - int isprint(c);                            c is a printing character.
+
+   - int iscntrl(c);                             c is a delete character or ordinary control character.
+
+   - int isascii(c);                           c is an ASCII character, code less than 0200.
+
+   - int toupper(intc);                          convert character c to upper case (leave it alone if not lower)
+
+   - int tolower(int c);                         convert character c to lower case (leave it alone if not upper)
+
+## Example-1: Write a program to find out the length of a given string without using the library function strlen().
+~~~js
+//Write a program to find out the length of a given string without using the library function strlen().
+#include<stdio.h>
+void main()
+    {
+    char str[50];
+    char nul={‘\0’}
+    int len;
+    printf("\nENTER A STRING: ");
+    gets(str);
+    for(len=0; str[len]!=nul; len++);
+        printf("\n THE LENGTH OF THE STRING IS %d", len);
+    }
+~~~
+~~~
+Result:
+Input:
+ENTER A STRING: This is string in C
+Output:
+THE LENGTH OF THE STRING IS 19. 146
+~~~
+### Example-2: Write a program to find out the length of a given string using the library function strlen().
+~~~js
+//Write a program to find out the length of a given string using the library function strlen().
+#include<stdio.h>
+#include<string.h>
+void main()
+    {
+    char name[30] = "This is string in C";
+    int len;
+    len= strlen( name );
+    printf( "Length of string <%s> is %d.\n", name ,len);
+    }
+~~~
+~~~
+Output:
+Length of string < This is string in C > is19.
+~~~
+### Example-3: Write a program to print the reverse of a given string.
+~~~js
+//Write a program to print the reverse of a given string.
+#include<stdio.h>
+#include<string.h>
+void main()
+    {
+    char ch[100];
+    int i,len;
+    printf("\n Enter a string: ");
+    gets(ch);
+    len= strlen(ch);
+    printf("\n The string in the reverse order: ");
+    for(i=len-1; i>=0; i--)
+        printf("%c", ch[i]);
+    }
+~~~
+~~~
+Result:
+Input
+Enter a string: strings are interesting.
+Output
+The string in the reverse order: .gnitseretni era sgnirts
+~~~
+### Example-4: Write a program to check if a given string is palindrome or not.
+~~~js
+//Write a program to check if a given string is palindrome or not.
+#include<stdio.h>
+#include<string.h>
+void main()
+    {
+    char a[100];
+    int i,len, flag=0;
+    printf("\n Enter a string: ");
+    gets(a);
+    len=strlen(a);
+    for(i=0;i<len; i++)
+        {
+        if(a[i]==a[len-i-1])
+        flag=flag+1;
+        }
+    if(flag==len)
+        printf("\n The string is palindrom");
+    else
+        printf("\n The string is not palindrom");
+    }
+~~~
+~~~
+RESULT:
+Input
+Enter a string: madam
+Output
+The string is palindrome
+~~~
+### Example-5: Write a program to count the number of vowels in a given string.
+~~~js
+//Write a program to count the number of vowels in a given string.
+#include<stdio.h>
+#include<string.h>
+void main()
+    {
+    char a[100];
+    int leni, vow=0;
+    printf("\n ENTER A STRING: ");
+    gets(a);
+    len=strlen(a);
+    for(i=0;i<len; i++)
+        {
+        if(a[i]=='a' || a[i]=='A' || a[i]=='e' || a[i]=='E' || a[i]=='i' ||
+        a[i]=='I' || a[i]=='o' || a[i]=='O' || a[i]=='u' || a[i]=='U')
+        vow=vow+1;
+        }
+    printf("\n There are %d vowels in the string", vow);
+    }
+~~~
+~~~
+RESULT:
+Input
+Enter a string: Evening
+Output
+There are 3 vowels in the string
+~~~
+### Example-6: Write a program to count the number of words in a given string. Two words are separated by one or more blank spaces.
+~~~js
+//Write a program to count the number of words in a given string. Two words are separated by one or more blank spaces.
+#include<stdio.h>
+#include<string.h>
+void main()
+    {
+    char a[100];
+    int len, word, i =0;
+    printf("\n Enter a string: ");
+    gets(a);
+    len=strlen(a);
+    for(i=0;i<len; i++)
+        {
+        if( a[i] !=' ' && a[i+1]==' ')
+        word=word+1;
+        }
+    printf("\n There are %d words in the string", word);
+    }
+~~~
+~~~
+RESULT:
+Input
+Enter a string: Strings are very interesting.
+Output
+There are 4 words in the string
+~~~

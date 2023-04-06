@@ -1,0 +1,243 @@
+---
+title: Thread Implementation in Java
+category: Java Tutorial
+author: Anonymous
+tags: ['#java', '#tutorial']
+date: 2021-01-01
+thumbnailText: Java Tutorial-32
+---
+## Thread Implementation in Java
+Creating thread in java is simple. Thread can be implemented in the form of object that contain method called run(). Run() method makes up the body of the thread and is the only method in which thread’s behavior can be implemented. Syntax of run method is as
+~~~js
+public void run()
+{
+  ---------
+  ---------
+Statements implementing Thread
+---------
+  ---------
+}
+~~~
+- The run method can be invoked by an object of the concerned thread.
+- This can be achieved by creating the thread and initiating it with the help of another thread method called as start().
+- We can create a thread by instantiating an object of type Thread. Java defines two ways in which this can be accomplished:
+1. By Implementing Runnable interface. – Runnable interface has only method called as run().
+2. By extending Thread class. – Extend Thread class and override the run method.
+## Thread Creation by Extending Class
+- Thread class provide constructors and methods to create and perform operations on a thread. We can make our class runnable as a thread by extending the class java.lang.Thread. This gives us access to all the thread methods directly. It includes the following steps:
+- Declare the class as extending the Thread class.
+- Implement the run() method that is responsible for executing the sequence of code that the thread will execute.
+- The run() method has been inherited by the class extended .We have to override this method in order to implement the code to be executed by our thread.
+- Create a thread object and call the start() method to initiate the thread execution. When we start the new thread, Java calls the thread’s run () method, so it is the run() where all the action takes place.
+## Sleep method in java
+- The sleep() method of Thread class is used to sleep a thread for the specified amount of time.
+- The Thread class provides two methods for sleeping a thread:
+- public static void sleep(long miliseconds)throws InterruptedException
+- public static void sleep(long miliseconds, int nanos) throws InterruptedException
+### Example-1: Write a java program to implement java thread by extending thread class.
+~~~js
+//Write a java program to implement java thread by extending thread class.
+ public class FunyThread extends Thread{
+  public void run() {
+    System.out.println("Thread running and I am from thread");
+   }
+  public static void main(String[] args) {
+    FunyThread funyThread=new FunyThread();
+    funyThread.start();
+   }
+ }
+~~~
+~~~
+Output:
+Thread running and I am from thread
+~~~
+
+### Example-2: Write a java program to implement thread by using thread class with sleep method.
+~~~js
+//Write a java program to implement thread by using thread class with sleep method.
+  public class FunyThread extends Thread{
+    public void run() {
+        int i;
+        try {
+          for(i=1;i<=5;i++) {
+             Thread.sleep(500);
+             System.out.println("i="+i);
+           }
+         }
+       catch(Exception e) {
+       }
+     }
+  public static void main(String[] args) {
+        FunyThread funyThread1=new FunyThread();
+        FunyThread funyThread2=new FunyThread();
+        funyThread1.start();
+        funyThread2.start();
+       }
+     }
+~~~
+~~~
+Output:
+i=1
+i=1
+i=2
+i=2
+i=3
+i=3
+i=4
+i=4
+i=5
+i=5
+~~~
+
+## Runnable Interface
+- The easiest way to create a thread is to create a class that implements the Runnable interface. Runnable abstracts a unit of exe code.
+- The Runnable interface should be implemented by any class whose instances are intended to be executed by a thread.
+- Runnable interface have only one method named run().
+- public void run(): is used to perform action for a thread.
+### Example-3: Write a java program to implement java thread by using runnable interface.
+~~~js
+//Write a java program to implement java thread by using runnable interface.
+  public class FunyThread extends Thread{
+  public void run() {
+    System.out.println("Thread Running using runnable interface");
+    }
+  public static void main(String[] args) {
+    FunyThread funyThread1=new FunyThread();
+    Thread t1=new Thread(funyThread1);
+    t1.start();
+    }
+  }
+~~~
+~~~
+Output:
+Thread Running using runnable interface
+~~~
+### Example-4: Write a java program to implement thread by using runnable interface with sleep method.
+~~~js
+//Write a java program to implement thread by using runnable interface with sleep method.
+  public class FunyThread implements Runnable {
+    public void run() {
+    int i;
+    try {
+       for(i=1;i<=5;i++) {
+        Thread.sleep(500);
+        System.out.println("i="+i);
+       }
+     }
+    catch(Exception e) {
+    }
+  }
+  public static void main(String[] args) {
+    FunyThread funyThread1=new FunyThread();
+    FunyThread funyThread2=new FunyThread();
+    Thread t1=new Thread(funyThread1);
+    Thread t2=new Thread(funyThread2);
+    t1.start();
+    t2.start();
+   }
+ }
+~~~
+~~~
+Output:
+i=1
+i=1
+i=2
+i=2
+i=3
+i=3
+i=4
+i=4
+i=5
+i=5
+~~~
+## Thread Priority
+- In Java, each thread is assigned a priority, which affects the order in which it is scheduled for running.
+- The threads that we have discussed so far are of the same priority. The threads of the same priority are given equal treatment by the Java scheduler and, therefore, they share the processor on a first-come, first-serve basis.
+- Java permits us to set the priority of a thread using the setPriority() method as follows:
+- ThreadName.setPriority(intNumber);
+- The intNumber is an integer value to which the thread’s priority is set. The Thread class defines several priority constants:
+- MIN PRIORITY = 1
+- NORM FRI ORITY = 5
+- MAX PRIORITY = 10
+- The intNumber may assume one of these constants or any value between 1 and 10. The default setting is NORM_PRIORITY.
+## Thread Join() Method
+- In normal circumstances we generally have more than one thread, thread scheduler schedules the threads, which does not guarantee the order of execution of threads.
+- The join() method is used to hold the execution of currently running thread until the specified thread is dead(finished execution).
+## Example-5: Write a java program to implement advantages of thread join method.
+~~~js
+// Write a java program to implement advantages of thread join method.
+  public class FunyThread extends Thread{
+    public void run() {
+    int i;
+    try {
+     for(i=1;i<=4;i++) {
+       Thread.sleep(500);
+       System.out.println("i="+i);
+      }
+    }
+  catch(Exception e) {
+  }
+}
+  public static void main(String[] args) {
+    FunyThread funyThread1=new FunyThread();
+    FunyThread funyThread2=new FunyThread();
+    FunyThread funyThread3=new FunyThread();
+    funyThread1.start();
+      try {
+           funyThread1.join();
+       }catch (Exception e) {
+       }
+    funyThread2.start();
+    funyThread3.start();
+    }
+}
+~~~
+~~~
+Output:
+i=1
+i=2
+i=3
+i=4
+i=1
+i=1
+i=2
+i=2
+i=3
+i=3
+i=4
+i=4
+~~~
+## Daemon Thread in Java
+- Daemon thread in java is a service provider thread that provides services to the user thread.
+- Its life depend on the mercy of user threads i.e. when all the user threads dies, JVM terminates this thread automatically.
+- There are many java daemon threads running automatically e.g. gc, finalizer etc.
+### Example-6: Write a java program to implement Daemon thread in java.
+
+~~~js
+//Write a java program to implement Daemon thread in java.
+ class FunyThread extends Thread{
+  public void run(){
+    if(Thread.currentThread().isDaemon()){//checking for daemon thread
+       System.out.println("Its daemon thread ");
+       }
+   else{
+       System.out.println("Its user thread ");
+       }
+     }
+  public static void main(String[] args){
+        FunyThread t1=new FunyThread();//creating thread
+        FunyThread t2=new FunyThread();
+        FunyThread t3=new FunyThread();
+        t1.setDaemon(true);//now t1 is daemon thread
+        t1.start();//starting threads
+        t2.start();
+        t3.start();
+      }
+    }
+~~~
+~~~
+Output:
+Its daemon thread
+Its user thread
+Its user thread
+~~~

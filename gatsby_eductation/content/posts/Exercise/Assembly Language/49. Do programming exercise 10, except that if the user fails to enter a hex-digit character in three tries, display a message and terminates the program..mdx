@@ -1,0 +1,113 @@
+---
+title: Do programming exercise 10, except that if the user fails to enter a hex-digit character in three tries, display a message and terminates the program.
+slug: do-programming-exercise-10-except-that-if-the-user-fails-to-enter-a-hex-digit-character-in-three-tries-display-a-message-and-terminates-the-program.
+category: Assembly Language Index
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+### 49. Do programming exercise 10, except that if the user fails to enter a hex-digit character in three tries, display a message and terminates the program.
+```
+
+.MODEL SMALL
+.STACK 100H
+.DATA
+MSG DB 0AH,0DH,'ENTER A HEX CHARACTER $'
+CH1 DB ?
+CH2 DB ?
+MSG1 DB 0AH,0DH,"IN DECIMAL IT IS "
+CH3 DB ?, "$"
+MSG2 DB 0AH,0DH,"IN DECIMAL IT IS: 1"
+C2 DB ?,'$'
+MSG3 DB 0AH,0DH,"DO YOU WANT TO CHECK MORE RESULTS?",0AH,0DH,"TYPE Y FOR YES , N FOR NO "
+C3 DB ?, "$"
+MSG4 DB 0AH,0DH,"INVALID INPUT! $"
+MSG5 DB 0AH,0DH ,"ENTERED INVALID INPUT FOR THREE TIMES! $"
+.CODE
+MAIN PROC
+MOV AX,@DATA
+MOV DS, AX
+MOV BL,0
+AGAIN:
+;PROMPT THE USER
+MOV AH, 9
+LEA DX, MSG
+INT 21H
+; READ A CHARACTER
+MOV AH, 1
+INT 21H
+MOV CH1,AL
+;CHECKING THE HEX CHARACTER
+CMP CH1, 39H ;39H=9
+JBE DIG
+CMP CH1, 46H ;46H=F
+JBE CHARACTER
+MOV AH,9
+LEA DX, MSG4 ;INVALID INPUT TRY AGAIN
+INT 21H
+INC BL
+CMP BL,3
+JE DISP
+JMP AGAIN
+DISP:
+MOV AH,9
+LEA DX, MSG5
+INT 21H
+JMP EXIT
+INPUT:
+;IF USER WANT TO TAKE NEXT INPUT
+MOV AH,9
+LEA DX,MSG3
+INT 21H
+MOV AH,1
+INT 21H
+MOV C3, AL
+CMP C3, 'Y'
+JE AGAIN
+CMP C3, 'Y'
+JE AGAIN
+JMP EXIT
+CHARACTER:
+;CALCULATION FOR HEX CHARACTER
+SUB AL, 11H
+MOV C2,AL
+MOV AH,9
+LEA DX, MSG2
+INT 21H
+JMP INPUT
+DIG:
+MOV AH,9
+LEA DX, MSG1
+INT 21H
+MOV AH,2
+MOV DL, CH1
+INT 21H
+JMP INPUT
+EXIT:
+MOV AH,4CH
+INT 21H
+MAIN ENDP
+END MAIN
+
+
+```
+
+## Input
+```
+ENTER A HEX CHARACTER
+INVALID INPUT!
+ENTER A HEX CHARACTER
+INVALID INPUT!
+ENTER A HEX CHARACTER
+INVALID INPUT!
+```
+## Output
+```
+ENTER A HEX CHARACTER
+INVALID INPUT!
+ENTER A HEX CHARACTER
+INVALID INPUT!
+ENTER A HEX CHARACTER
+INVALID INPUT!
+ENTERED INVALID INPUT FOR THREE TIMES!
+```

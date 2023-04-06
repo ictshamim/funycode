@@ -1,0 +1,444 @@
+---
+title: Constructor In Cplusplus
+category: Cplusplus Tutorial
+author: Anonymous
+tags: ['#C++', '#tutorial']
+date: 2021-01-12
+thumbnailText: C++ Tutorial-20
+---
+## Constructor in C++
+A constructor function is a public function and has same name as that of the class. It is used to initialize the object data variables or assign dynamic memory in the process of creation of an object of the class so that the object becomes operational.
+
+- Whenever a new instance or an object of the class is declared the constructor is automatically invoked and allocates appropriate size of memory block for the object.
+- The constructor function simply initializes the object.
+- It does not return any value. It is not even void type. So nothing is written for its type.
+~~~js
+// class with a constructor
+class show
+    {
+    int m, n;
+    public:
+    show(void); // constructor declared
+    .....
+    .....
+    };
+show:: show(void) // constructor defined
+    {
+    m = 0; n = 0;
+    }
+~~~
+- In the above declaration, one class has been declared with name show and a method also defined with the same name of class show.
+## Important Feature of Constructor
+
+- The constructors are always declared in the public section. If declared in the private section then objects are can only be created inside the member functions but serve no purpose.
+- They are invoked automatically when objects of the class are created.
+- They do not have any return type not even void so they cannot return any value.
+- Constructors cannot be inherited, but they can be called from the constructors of derived class.
+- Constructors are used to construct the object of the class.
+- The constructor with no argument is known as default constructor of the class.
+- Constructors which take arguments like a function takes are known as parameterized constructor.
+- There is no limit of the number of constructors declared in a class but they all must conform to rules of function overloading.
+- Constructor can have default arguments.
+- Addresses of constructors cannot be taken.
+- Constructors cannot be virtual.
+- Constructor make implicit calls to operators new and delete in case memory allocation and de-allocation is to be performed.
+## Why Use Constructor
+
+- Traditional programming languages only allocate memory for a variable being defined.
+- The programmer must ensure that the variable is initialized with suitable values.
+- Non-initialized objects can lead to serious runtime errors in the programs.
+- To avoid errors of this type, C++ performs implicit initialization when an object is defined.
+- This ensures that objects will always have valid data to work on.
+- Initialization is performed by special methods known as constructors.
+## Types of Constructor
+- Constructor mainly three types are
+1. Default Constructor
+2. Parameterized Constructor
+3. Copy Constructor
+
+## Default Constructor
+- A constructor without parameters is referred to as a default constructor. The default constructor is only called if an object definition does not explicitly initialize the object.
+- A default constructor will use standard values for all data members.
+- If a class does not contain a constructor definition, the compiler will create a minimal version of the default constructor as a public member.
+- However, this constructor will not perform initialization.
+- By contrast, if a class contains at least one constructor, a default constructor must be defined explicitly, if it is needed.
+~~~js
+class integer
+    {
+    int m,n;
+    public:
+    integer() // Default constructor
+        {
+        m=n=0;
+        }
+    };
+~~~
+
+### Example-1: Write a  C++ program to demonstrate the use of default constructor.
+~~~js
+// C++ program to demonstrate the use of default constructor
+#include<iostream>
+using namespace std;
+// declare a class
+class Hello {
+    private:
+    double length;
+    public:
+    // create a constructor
+    Hello() {
+        // initialize private variables
+        length = 5.5;
+        cout << "Default Constructor." << endl;
+        cout << "Length = " << length << endl;
+        }
+    };
+int main() {
+    // create an object
+    Hello obj;
+    return 0;
+    }
+~~~
+~~~
+Output:
+Default Constructor.
+Length = 5.5
+~~~
+## Parameterized constructor
+- Constructors that can take arguments are called parameterized constructors.
+- Sometimes it is necessary to initialize the various data elements of different objects with different values when they are created.
+- We can achieve this objective by passing arguments to the constructor function when the objects are created.
+~~~js
+class integer
+    {
+    int m,n;
+    public:
+    integer(int x,int y) // Parameterized constructor
+        {
+        m =x;
+        n=y;
+        }
+    };
+~~~
+### Example-2: Write a  C++ program to demonstrate the use of parameterized constructor for integer data.
+~~~js
+// C++ program to demonstrate the use of parameterized constructor
+#include<iostream>
+using namespace std;
+class demo
+    {
+    int a,b;
+    public :
+    demo( )
+        {
+        a=b=0;
+        cout<<"Zero argument constructor called\n";
+        show( );
+        }
+    demo(int x, int y)
+        {
+        a=x;
+        b=y;
+        cout<<"Two argument constructor called\n";
+        show( );
+        }
+    demo(int x)
+        {
+        a=b=x;
+        cout<<"One argument constructor called\n";
+        show( );
+        }
+    void show( )
+        {
+        cout<<"a="<<a<<"\tb="<<b<<endl;
+        }
+    };
+int main( )
+    {
+    demo d1;
+    demo d2(10,20);
+    demo d3(30);
+    }
+~~~
+~~~
+Output:
+Zero argument constructor called
+a=0 b=0
+Two argument constructor called
+a=10 b=20
+One argument constructor called
+a=30 b=30
+~~~
+## Implicit and Explicit Call to Constructor
+- Constructor can be called implicitly or explicitly.
+- For example for the above program just explained. All three calls to 3 different constructors were implicit.
+~~~
+demo d1;
+demo d2 (10, 20);
+demo d3 (30);
+~~~
+- In implicit call we simply write the class name and then object name (in case of default constructor) or pass parameters but does not use the constructor name is any manner.
+- In explicit call to constructor we explicitly call the constructor by writing its name and passing argument if any.
+- For the above implicit call to constructors explicit calls would be :
+~~~
+demo d1 = demo( );
+demo d2 = demo (10,20);
+demo d3 = demo (30);
+~~~
+- Note on the left side of assignment operator object is created and on the right hand side constructor is called explicitly.
+- Even when you called a constructor for an object implicitly you can call it explicitly in case you want to provide values to data members or want to modify the values like :
+~~~
+demo d1(10);
+~~~
+- Both a and b gets the value 10. Later you can write if you want d1 = demo (100, 200); which makes a =100 and b =200.
+### Example-3: Write a  C++ program to demonstrate the use of parameterized constructor for string data.
+~~~js
+//Write a  C++ program to demonstrate the use of parameterized constructor for string data.
+#include <iostream>
+#include<string.h>
+using namespace std;
+class strings
+    {
+    char str[20];
+    public :
+    strings( );
+    strings (char s[ ]);
+    void show( );
+    };
+strings :: strings( )
+    {
+    strcpy (str,"Hari");
+    cout<<"Default constructor called\n";
+    }
+strings :: strings (char s[ ])
+    {
+    strcpy(str,s);
+    cout<<"One argument constructor called\n";
+    }
+void strings :: show( )
+    {
+    cout<<"string is"<<str<<endl;
+    }
+int main( )
+    {
+    strings s1;
+    s1.show( );
+    s1=strings("Vijay");
+    s1.show( );
+    strings s2=strings("Manmohan");
+    s2.show( );
+    strings s3("Ranjana");
+    s3.show( );
+    }
+~~~
+### Example-4: Write a C++ program to demonstrate the use of parametrized constructor for storing two co-ordinate of a point.
+~~~js
+// Write a C++ program to demonstrate the use of parametrized constructor for storing two co-ordinate of a point.
+#include<iostream>
+using namespace std;
+class Point
+    {
+    int x, y;
+    public:
+    Point(int a, int b) //inline parameterized constructor definition
+        {
+        x=a;
+        y=b;
+        }
+        void display()
+        {
+        cout<<"("<<x<<","<<y<<")\n";
+        }
+    };
+int main()
+    {
+    Point p1(1,1); //invokes parameterized constructor
+    Point p2(5,10);
+    cout<<"Point p1 = ";
+    p1.display();
+    cout<<"Point p2 = ";
+    p2.display();
+    return 0;
+    }
+~~~
+~~~
+Output:
+Point p1 = (1,1)
+Point p2 = (5,10)
+~~~
+## Copy Constructor
+- The copy constructor initializes an object with another object of the same type. It is called automatically when a second, already existing object is used to initialize an object.
+
+- A copy constructor is used to declare and initialized an object from another object when ever we have statement like demo d2 = d1 (assume demo is class name and d1 is an already declared object of demo class), they make call to copy constructor defined in the class.
+- When we have two objects say d1 and d2 and if we write d2=d1 then this results in copying all members of d1 to d2 but does not call copy constructor.
+- This is simply assignment of one object to another of same type, but when you want to do something more than merely copying one object to another you may use copy constructor.
+- For a class demo, copy constructor is written as :
+~~~
+demo (demo &d)
+{
+// copy constructor
+}
+~~~
+### Example-5: Write a C++ program to demonstrate the use of copy constructor .
+~~~js
+//Write a C++ program to demonstrate the use of copy constructor .
+#include<iostream>
+using namespace std;
+class demo
+    {
+    int data;
+    public :
+    demo( )
+        {
+        data =200;
+        cout<<"Default constructor is called\n";
+        }
+    demo(int x)
+        {
+        data = x;
+        }
+    demo (demo &d)
+        {
+        data= d.data;
+        cout<<"copy constructor is called\n";
+        }
+    void show( )
+        {
+        cout<<"data="<<data<<endl;
+        }
+    };
+int main( )
+    {
+    demo d1(300);
+    demo d2=d1;
+    demo d3;
+    d3=d2;
+    demo d4=d3;
+    d1.show( );
+    d2.show( );
+    d3.show( );
+    d4.show( );
+    }
+~~~
+~~~
+Output:
+copy constructor is called
+Default constructor is called
+copy constructor is called
+data=300
+data=300
+data=300
+data=300
+~~~
+### Example-6: Write a C++ program to demonstrate the use of copy constructor .
+~~~js
+//Write a C++ program to demonstrate the use of copy constructor .
+#include<iostream>
+using namespace std;
+class code
+    {
+    int id;
+    public:
+    code() { } // constructor
+    code(int a)
+        {
+        id = a; // constructor again
+        }
+    code(code & x) // copy constructor
+        {
+        id = x.id; // copy in the value
+        }
+    void display(void)
+        {
+        cout << id;
+        }
+    };
+int main()
+    {
+    code A(100); // object A is created and initialized
+    code B(A); // copy constructor called
+    code C = A; // copy constructor called again
+    code D; // D is created, not initialized
+    D = A; // copy constructor not called
+    cout << "\n id of A:";
+    A.display();
+    cout << "\n id of B:";
+    B.display();
+    cout << "\n id of C:";
+    C.display();
+    cout << "\n id of D:";
+    D.display();
+    return 0;
+    }
+~~~
+~~~
+Output:
+id of A:100
+id of B:100
+id of C:100
+id of D:100
+~~~
+## Dynamic Constructor
+- The constructors can also be used to allocate memory while creating objects.
+
+- This will enable the system to allocate the right amount of memory for each object when the objects are not of the same size, thus resulting in the saving of memory.
+- Allocation of memory to objects at the time of their construction is known as dynamic construction of objects.
+- The memory is allocated with the help of the new operator.
+- Program 6.5 shows the use of new, in constructors that are used to construct strings in objects.
+### Example-7: Write a C++ program to demonstrate the constructors that are used to construct strings in objects.
+~~~js
+//Write a C++ program to demonstrate the constructors that are used to construct strings in objects.
+#include<iostream>
+#include<string.h>
+using namespace std;
+class String
+    {
+    char *name;
+    int length;
+    public:
+    String() // constructor-1
+        {
+        length = 0;
+        name = new char[length + 1];
+        }
+    String(char *s) // constructor-2
+        {
+        length = strlen(s);
+        name = new char[length + 1]; // one additional character for \0
+        strcpy(name, s);
+        }
+    void display(void)
+        {
+        cout << name << "\n";
+        }
+    void join(String &a, String &b);
+    };
+void String :: join(String &a, String &b)
+    {
+    length = a.length + b.length;
+    delete name;
+    name = new char[length+1]; // dynamic allocation
+    strcpy(name, a.name);
+    strcat(name, b.name);
+    };
+int main()
+    {
+    char *first = "Joseph ";
+    String name1(first), name2("Louis "), name3 ("Lagrange"), s1,s2;
+    s1.join(name1, name2);
+    s2.join(s1, name3);
+    name1.display();
+    name2.display();
+    name3.display();
+    s1.display();
+    s2.display();
+    return 0;
+    }
+~~~
+~~~
+Output:
+Joseph
+Louis
+Lagrange
+Joseph Louis
+Joseph Louis Lagrange
+~~~

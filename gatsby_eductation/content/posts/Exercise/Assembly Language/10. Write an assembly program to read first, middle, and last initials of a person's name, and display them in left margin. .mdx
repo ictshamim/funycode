@@ -1,0 +1,103 @@
+---
+title: Write an assembly language program to read first middle and last initials of a persons name and display them in left margin
+category: Assembly Language Index
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+### 10. Write an assembly program to read first, middle, and last initials of a person's name, and display them in left margin.
+```
+.model small
+.stack 100h
+.data
+msg1 db "Enter first name:$"
+msg2 db 13,10,"Enter second name:$"
+msg3 db 13,10,"Enter third name:$"
+
+.code
+main proc
+
+ mov ax,@data
+ mov ds,ax
+
+ lea dx,msg1
+ mov ah,9
+ int 21h
+
+ mov ah,1
+ int 21h
+ mov bl,al
+
+ lea dx,msg2
+ mov ah,9
+ int 21h
+
+ mov ah,1
+ int 21h
+ mov cl,al
+
+ lea dx,msg3
+ mov ah,9
+ int 21h
+
+ mov ah,1
+ int 21h
+ mov bh,al
+
+ mov ah,2
+ mov dl,13
+ int 21h
+
+ mov ah,2
+ mov dl,10
+ int 21h
+
+ mov ah,2
+ mov dl,bl
+ int 21h
+
+ mov ah,2
+ mov dl,13
+ int 21h
+
+ mov ah,2
+ mov dl,10
+ int 21h
+
+ mov ah,2
+ mov dl,cl
+ int 21h
+
+ mov ah,2
+ mov dl,13
+ int 21h
+
+ mov ah,2
+ mov dl,10
+ int 21h
+
+ mov ah,2
+ mov dl,bh
+ int 21h
+
+
+
+ mov ah,4ch
+ int 21h
+
+ main endp
+ end main
+```
+
+## Input
+```
+Enter first name: a
+Enter second name: b
+Enter third name: c
+```
+## Output
+```
+a
+b
+c
+```

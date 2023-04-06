@@ -1,0 +1,220 @@
+---
+title: Static Keyword In Cplusplus
+category: Cplusplus Tutorial
+author: Anonymous
+tags: ['#C++', '#tutorial']
+date: 2021-01-13
+thumbnailText: C++ Tutorial-19
+---
+## Static Keyword in C++
+Static variables are those variables which persist even after control returns from the functions. In terms of static members as class members they are the members which are one for a class and not one for an object. Static members can be either functions or static data. They are also known as class variables as they belong to whole of the class.
+
+## Static Member Functions
+- Let’s discuss static function first. Note several points about static member’s functions :
+- Static functions are functions which are made static by placing keyword static before function definition in side the class.
+- All static function of class must be defined inside the class. You cannot separate the declaration and definition of a static member function.
+- Static functions are one for class and you can call them as.
+- In a static function only static data members, other static variables or other static function can be used.
+- Though static member function is called using class name with : : operator.
+- It can be called explicitly using objects of the class.
+## Static Data Members
+- Whenever an object is created separate copies of data members are created for each object. But in case of static data members only one copy of static data members is available which is shared among all the objects created. Note several points the about static data members :
+- They are created by placing static keyword before variable declaration.
+- All static variables are declared inside the class but are initialized outside the class as :
+~~~
+data_type class_name : : static_variable =value;
+~~~
+- If value is not given they are initialized to zero.
+- There is one single copy of the static data member is created which is shared among all objects.
+- Changes made by one object on a static data members is created which is shared among all objects.
+- The lifetime of a static variable is the entire program.
+- They are used when you have to keep one value common to whole class.
+### Example-1: Write a C++ program to illustrate a simple static function.
+~~~js
+#include<iostream>
+using namespace std;
+class demo
+    {
+    public :
+    static void show( )
+        {
+        cout<<"Demo of static function\n";
+        }
+    };
+int main( )
+    {
+    demo ::show( );
+    }
+~~~
+~~~
+Output:
+Demo of static function
+~~~
+### Example-2: Write a C++ program to illustrate that static function are called by using both object and class name.
+~~~js
+//Write a C++ program to illustrate that static function are called by using both object and class name.
+#include<iostream>
+using namespace std;
+class demo
+    {
+    public :
+    static void show ( )
+        {
+        cout<<"Demo of static function \n";
+        }
+    };
+int main( )
+    {
+    demo d1;
+    demo :: show( );
+    d1.show( );
+    }
+~~~
+~~~
+Output:
+Demo of static function
+Demo of static function
+~~~
+### Example-3: Write a C++ program to illustrate that static function may called from a non static function.
+~~~js
+//Write a C++ program to illustrate that static function may called from a non static function.
+#include<iostream>
+using namespace std;
+class demo
+    {
+    public :
+    static void show( )
+        {
+        cout<<"Demo of static function \n";
+        }
+    void disp( )
+        {
+        show( );
+        }
+    };
+int main( )
+    {
+    demo d1;
+    d1.show( );
+    }
+~~~
+
+### Example-4: Write a C++ program to illustrate that a static function can not called a non static function.
+~~~js
+//Write a C++ program to illustrate that a static function can not called a non static function.
+#include<iostream>
+using namespace std;
+class demo
+    {
+    public :
+    static void show( )
+        {
+        cout<<"DEMO OF STATIC FUNCTION"<<endl;
+        show1( );
+        }
+    void show1( )
+        {
+        cout<<"HELLO FROM SHOW FUNCTION"<<endl;
+        }
+    };
+int main( )
+    {
+    demo : :show( );
+    }
+~~~
+~~~
+Output:
+error: cannot call member function 'void demo::show1()' without object|
+~~~
+### Example-5: Write a C++ program to illustrate that a static function can not be declared  defined outside the class.
+~~~js
+//Write a C++ program to illustrate that a static function can not be declared  defined outside the class.
+#include<iostream>
+using namespace std;
+class demo
+    {
+    public :
+    static void show( );
+    };
+static void demo ::show( )
+    {
+    cout<<"HELLO FROM STATCI SHOW \n";
+    }
+int main( )
+    {
+    demo :: show( );
+    }
+~~~
+~~~
+Output:
+error: cannot declare member function 'static void demo::show()' to have static linkage [-fpermissive]|
+~~~
+### Example-6: Write a C++ program to illustrate a static variable implementation.
+~~~js
+//Write a C++ program to illustrate a static variable implementation.
+#include<iostream>
+using namespace std;
+class stat_demo
+    {
+    static int s;
+    static float f;
+    static char *str;
+    static char ch;
+    public :
+    static void show( )
+        {
+        cout<<"s="<<s<<endl;
+        cout<<"f="<<f<<endl;
+        cout<<"str="<<str<<endl;
+        cout<<"ch="<<ch<<endl;
+        }
+    };
+int stat_demo :: s=20;
+float stat_demo :: f=234.567;
+char* stat_demo :: str="static";
+char stat_demo :: ch='S';
+int main( )
+    {
+    stat_demo :: show( );
+    }
+~~~
+~~~
+Output:
+s=20
+f=234.567
+str=static
+ch=S
+~~~
+### Example-7: Write a C++ program to illustrate a static and non static variable implementation.
+~~~js
+//Write a C++ program to illustrate a static and non static variable implementation.
+#include<iostream>
+using namespace std;
+class demo
+    {
+    static int s;
+    int ns;
+    public :
+    void input(int x)
+        {
+        ns= x;
+        }
+    void show( )
+        {
+        cout<<"ns="<<ns<<endl;
+        cout<<"s="<<s<<endl;
+        }
+    };
+int demo ::s =20;
+int main( )
+    {
+    demo d1;
+    d1.input(10);
+    d1.show( );
+    }
+~~~
+~~~
+Output:
+ns=10
+s=20
+~~~

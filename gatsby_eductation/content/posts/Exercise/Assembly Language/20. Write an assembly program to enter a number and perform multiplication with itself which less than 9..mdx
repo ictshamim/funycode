@@ -1,0 +1,50 @@
+---
+title: Write an assembly language program to enter a number and perform multiplication with itself which less than 9
+slug: write-an-assembly-program-to-enter-a-number-and-perform-multiplication-with-itself-which-less-than-9
+category: Assembly Language Index
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+### 20. Write an assembly program to enter a number and perform multiplication with itself which less than 9
+```
+.model small
+.stack 100h
+.data
+
+.code
+main proc
+
+ mov ax,@data
+ mov ds,ax
+
+ mov ah,1
+ int 21h
+ mov bl,al
+ sub bl,30h
+
+ mov al,bl
+
+ mul bl
+
+
+ mov ah,2
+ add al,30h
+ mov dl,al
+ int 21h
+
+ mov ah,4ch
+ int 21h
+
+ main endp
+ end main
+```
+
+## Input
+```
+3
+```
+## Output
+```
+9
+```

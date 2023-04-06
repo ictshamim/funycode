@@ -1,0 +1,202 @@
+---
+title: Pointer with Function in C
+category: Basic C Tutorial
+author: Anonymous
+tags: ["#c", "#tutorial"]
+thumbnailText: C Programming Tutorial-33
+date: 2021-02-27
+---
+## Pointer with Function in C
+C allows operations of pointers with functions. The typical use of this is passing an argument to called function in the function declaration. Sometimes only with a pointer a complex function can be easily represented and success. The usage of  pointers with function in C definition may be classified into two groups.
+
+1. Call by reference
+2. Call by value.
+3. Call by Reference
+- The address of a variable is passed to a function through a pointer. This means that the value of the variable maybe changed inside the function. Passing the address of a variable to a function is called passing by reference. The function which is called by reference can change the values of the variable used in the calling program. For example,
+~~~js
+int x, y;
+~~~
+- To pass by reference the variables x and y to function add, add (&x, &y); /*address of x and y is passed*/ In the called function add () x and y variable values can obtained by inserting asterisk (*) before the formal parameters name.
+
+### Example-1: Write a C program to illustrate call by reference using pointer.
+~~~js
+#include<stdio.h>
+#include<string.h>
+void main()
+    {
+    int x,y;
+    x=20;
+    y=30;
+    printf("\n Value of x and y before function call a=%d, b= %d", x, y);
+    fncn(&x, &y);
+    printf("\n Value of x and y after function call a=%d,b=%d", x, y);
+    }
+void fncn(int *p,int *q)
+{
+    {
+    *p=*p+*p+2;
+    *q=*q+*q+3;
+    }
+}
+~~~
+~~~
+Output:
+Value of x and y before function call x=20, y=40
+Value of x and y after function call x=42, y=63
+~~~
+### Example-2: Write a C program to illustrate call by reference using pointer.
+~~~js
+//Write a C program to illustrate call by reference using pointer.
+#include<stdio.h>
+#include<string.h>
+int myfunction(int p1, int* p2)
+    {
+    p1 = 1 ;
+    *p2 = 2;
+    }
+int main()
+    {
+    int x = 5, y = 6;
+    int *pY = &y ;
+    printf("\nValue of x and y before function call x=%d, y=%d", x, y);
+    myfunction(x, pY) ;
+    printf("\n Value of x and y after function x=%d, y=%d", x, y);
+    }
+~~~
+~~~
+Output:
+x=5, y=6
+x=5, y=2
+~~~
+## Call by Value
+- The call by value method of passing arguments to a function copies the actual value of an argument into the formal parameter of the function. In this case, changes made to the parameter inside the function have no effect on the argument. By default, C programming uses call by value to pass arguments.
+
+- Consider the function swap() definition as follows.
+~~~js
+/* function definition to swap the values */
+void swap(int x, int y) {
+    int temp;
+    temp = x; /* save the value of x */
+    x = y;    /* put y into x */
+    y = temp; /* put temp into y */
+    return;
+    }
+~~~
+## Pointers and Arrays
+- An array is actually very much like a pointer. We can declare the arrays first element of array can be declared as a1[0] or as int *a1 because a[0] is an address and *a is also an address. Hence the correspondence between array and pointers can be understood in the following section.
+
+## Pointers and One Dimensional Array
+- An array is a collection of items of the same data type. For example, the following are all array declarations:
+~~~js
+int x[30]; /* an array of integers/
+char name[20]; /* an array of characters*/
+double g1[30]; /* an array of doubles*/
+Consider the following:
+int x[5] = {8, 4, 9, 6, 3};
+~~~
+- Here array x is containing 5 integers. Each of these integers can be referred by means of a subscript to x i.e. using x[0] through x[5]. Alternatively array can be accessed via a pointer as follows:
+~~~js
+int *ptr; /*declare the pointer*/
+ptr = &x[0]; /* pointer points to first element of the array*/
+~~~
+- In the similar way other array elements can also be accessed as given below.
+~~~js
+p = &x[1]; /* pointer points to second element of the array*/
+p = &x[2]; /* pointer points to third element of the array*/
+p = &x[3]; /* pointer points to fourth element of the array*/
+~~~
+- The other way of assigning the array to pointer is
+~~~js
+int p[200];
+int*ptr;
+ptr=p;
+This is exactly same as ptr=p[0];
+~~~
+- The following equalities are also valid.
+~~~js
+Ptr+6=&p[6];
+*ptr==&p[0];
+*(ptr+6)==&value[6];
+~~~
+- The array subscripting is defined in terms of pointer arithmetic. The expression a[i]is defined to be same as *( (a)+(i) ). Array and pointers concept can be well understood by the following program.
+
+## Exampl-3: Write a C program to illustrate array and pointer.
+~~~js
+//Write a C program to illustrate array and pointer.
+#include<stdio.h>
+#include<string.h>
+main()
+    {
+    int a[4]={1,2,3,4};
+    int*ptr;
+    int i,n,temp;
+    n=4;
+    Printf(“ Contents of array\n“)
+    for(i=0;i<=n-1;i++)
+        temp=a[i];
+    printf(“a[%d]value =%d \n“ i, temp);
+    }
+~~~
+~~~
+Output:
+Contents of array
+a[0] value=1
+a[1] value=2
+a[2] value=3
+a[3] value=4
+~~~
+## Pointers and Strings
+- A string is an array of characters ending with the NULL character. A string constant is enclosed in double quotes, e.g. “hello”, “I like C” In order to assign a pointer to string, A character data type pointer variable is declared and the address of the first element of a character array is assigned to pointer variable as shown For example,
+~~~js
+char a[] = "hello";/*string*/
+char *ptr1;/*Declare a character data type pointer*/
+char *ptr1 = &a[0]; /*Assign array to pointer*/
+To print the string:
+
+printf("string is: %s\n",a);
+printf("string pointed by pointer ptr1: %s\n",ptr1);
+OUTPUT:
+string is: hello
+string pointed by pointer ptr1: hello
+~~~
+## Example-4: Write a C program to illustrate array and pointer.
+~~~js
+//Write a C program to illustrate array and pointer.
+#include<stdio.h>
+#include<string.h>
+void main() {
+    char *array[2];
+    array[0]="Hello";
+    array[1]="World";
+    printf("The Array of String is = %s,%s\n", array[0], array[1]);
+    }
+~~~
+~~~
+Output
+The Array of String is = Hello, World
+All the string functions can be used with pointers.
+~~~
+### Example-5: Write a C program to understand usage of strlen()function with pointer.
+~~~js
+//Write a C program to understand usage of strlen()function with pointer.
+/* Measuring string length */
+#include<stdio.h>
+#include<string.h>
+int main()
+    {
+    char str1[] = {`A', ` `, `s', `t', `r', `i', `n', `g', `\0'};
+    char str2[] = "string constant";
+    char *ptr_str = "Assign a string to a pointer.";
+    printf("The length of str1 is: %d bytes\n", strlen(str1));
+    printf("The length of str2 is: %d bytes\n", strlen(str2));
+    printf("The length of the string assigned to ptr_str is: %d bytes\n",
+    strlen(ptr_str));
+    return 0;
+    }
+~~~
+~~~
+OUTPUT
+The length of str1 is: 9 bytes
+The length of str2 is: 15 bytes
+The length of the string assigned to ptr_str is: 29 bytes
+~~~

@@ -1,0 +1,240 @@
+---
+title: Template in Cplusplus
+category: Cplusplus Tutorial
+author: Anonymous
+tags: ['#C++', '#tutorial']
+date: 2021-01-02
+thumbnailText: C++ Tutorial-30
+---
+## Template in C++
+Template is one of the most important and useful feature of C++.  Template provides the idea of generic classes. Use of one function or class that works for all data types is generalization. With the help of templates and functions we can create generic data types and idea leads to generic programming. In the generic programming generic data types are passed as argument to function and classes.
+
+## Important Points Regarding Template
+
+- Template provides the idea of generic classes.
+- Use of one function or class that works for all data types is generalization.
+- With the help of templates and functions we can create generic data types and this idea leads to generic programming.
+- In the generic programming generic data types are passed as argument to function and classes.
+- A template is similar to a macro which can work for different types of data.
+- A template created for a function so a function works for variety of data types is termed as function template.
+- For example a function template max is written which finds maximum of two integer, two floats, two chars etc.
+- Similarly, when a template is written for a class so one single class works for variety of data types is termed as class template.
+## Function Template
+- A function template is created when we write one definition of function which works with different type of data types.
+
+- A function template does not occupy space in memory.
+- The actual definition of function template is generated when function is called with specific data type.
+- The function template does not result in saving memory.
+- Function template simply relieves us from writing same amount of code for different data types.
+~~~
+The syntax for creating a function template :
+template
+function definition;
+~~~
+- Before function definition we write template which is a keyword.
+- In the brackets < and > we write class and any name which serves as the generic type.
+- The name may be a single character or a word (similar to identifier).
+- The name usually written in capital but may be in small case too.
+
+### Example-1: Write a C++ program to display different types of variable with their type using function template.
+~~~js
+//Write a C++ program to display different types of variable with their type using function template.
+#include<iostream>
+#include<typeid>
+using namespace std;
+template <class FUNC>
+void show(FUNC par)
+    {
+    cout<<"Displaying"<<typeid(par).name( )<<"Parameter\t"<<;
+    }
+int main( )
+    {
+    int x=234;
+    float y=34.56f;
+    double d=3.444456;
+    char ch='P';
+    char *s= "Template";
+    show(x);
+    show(y);
+    show(d);
+    show(ch);
+    show(s);
+    }
+~~~
+~~~
+Output:
+Displaying int Parameter 234
+Displaying float Parameter 34.56
+Displaying double Parameter 3.44446
+Displaying char Parameter P
+Displaying  char * Parameter Template
+~~~
+### Explanation:
+- The line template has to be written whenever you want to create either a function template or class template.
+- The name FUNC is generic data type name. It is replaced by the actual data type when a specific data type is used with the function call.
+- The statement typeid(par).name gives the actual data type of the variable. Function template does not save memory.
+- It saves us only from writing repetitive code which works for different type of data.
+
+### Example-2: Write a C++ program to find maximum of two number using function template.
+~~~js
+//Write a C++ program to find maximum of two number using function template.
+#include<iostream>
+using namespace std;
+template <class FUNC>
+FUNC max2(FUNC a, FUNC b)
+    {
+    return (a>b?a :b);
+    }
+int main( )
+    {
+    int x=10,y=20;
+    float f1=2.4, f2=4.5;
+    char ch1='A', ch2='B';
+    cout<<"\n Max of two integers "<< x <<" & "<< y <<" is\t";
+    cout<<max2(x,y);
+    cout<<"\n Max of two floats "<< f1 <<" & "<< f2 <<" is\t";
+    cout<<max2(f1,f2);
+    cout<<"\n Max of two chars "<< ch1 <<" & "<< ch2 <<" is\t";
+    cout<<max2(ch1,ch2);
+    }
+~~~
+~~~
+Output:
+Max of two integers 10 & 20 is 20
+Max of two floats 2.4 & 4.5 is 4.5
+Max of two chars A & B is B
+~~~
+### Example-3: Write a C++ program to work with generic data type using function template.
+~~~js
+//Write a C++ program to work with generic data type using function template.
+#include<iostream>
+#include<typeid>
+using namespace std;
+template<class T1, class T2>
+void show(T1 par1, T2 par2)
+    {
+    cout<<typeid(par1).name( )<<" parameter="<<par1<<"\t";
+    cout<<typeid(par2).name( )<<" parameter="<<par2<<endl;
+    }
+int main( )
+    {
+    show(14,'B');
+    show("NMIMS",35.67);
+    }
+~~~
+~~~
+Output:
+int parameter=14 char parameter=B
+char * parameter=NMIMS double parameter=35.67
+~~~
+### Example-4: Write a C++ program to check the equity of two data type of two variable  using function template.
+~~~js
+//Write a C++ program to check the equity of two data type of two variable  using function template. #include
+#include<iostream>
+using namespace std;
+template<class T1, class T2>
+void equal(T1 x, T2 y)
+    {
+    const char*p1=typeid(x).name( );
+    const char*p2=typeid(y).name( );
+    if(strcmp(p1,p2)==0)
+    cout<<"Data type "<<p1<<" and "<else
+    cout<<"Data type "<<p1<<" and "<<p2<<" is not same"<<endl;
+    }
+int main( )
+    {
+    equal(23.45, 23.45);
+    equal('A',65);
+    equal(2.0, 2.0f);
+    equal("str",(int*)"str");
+    }
+~~~
+~~~
+Output:
+Data type double and double is same
+Data type char and int is not same
+Data type double and float is not same
+Data type char * and int * is not same
+~~~
+### Example-5: Write a C++ program to illustrate of overloading of function template.
+~~~js
+//Write a C++ program to illustrate of overloading of function template.
+#include<iostream>
+#include<typeid>
+#include<string.h>
+using namespace std;
+template <class T>
+void show(T par)
+    {
+    cout<<"Function template show \n";
+    cout<<"par : ="<<par<<endl;
+    }
+void show(char*s)
+    {
+    cout<<"Explicit function show\n";
+    cout<<"s="<<s<<endl;
+    }
+int main( )
+    {
+    show(12);
+    show(34.78);
+    show("Explicit");
+    }
+~~~
+~~~
+Output:
+Function template show
+par : =12
+Function template show
+par : =34.78
+Function template show
+par : =Explicit
+~~~
+## Class Template
+- Similar to function template we can create class template. The difference is simply that earlier we created template for a function now we will be creating it for class. The class templates are basically used for creating container classes. That is which can contains varieties of objects of any type. For the class templates definition method remains same but instantiation changes. Take an example :
+~~~js
+template <class PAR>
+class demo
+    {
+    T x, y;
+    public :
+    ……………;
+    ……………;
+    };
+~~~
+- The template class can be instantiated when an object of the class will be created.
+### Example-6: Write a C++ program to illustrate sum of two integer using class template.
+~~~js
+//Write a C++ program to illustrate sum of two integer using class template.
+#include<iostream>
+#include<typeid>
+#include<string.h>
+using namespace std;
+template
+class demo
+    {
+    PAR n1,n2;
+    public :
+    demo(PAR x, PAR y)
+        {
+        n1=x;
+        n2=y;
+        }
+    PAR sum( )
+        {
+        return(n1+n2);
+        }
+    };
+int main( )
+    {
+    demod1(10,20);
+    cout<<"Sum="<<d1.sum( )<<endl;
+    demod2(2.4f,4.5f);
+    cout<<"Sum="<<d2.sum( )<<endl;
+    }
+~~~
+~~~
+Output:
+Sum=30
+Sum=6.9
+~~~

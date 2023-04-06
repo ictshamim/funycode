@@ -1,0 +1,64 @@
+---
+title: Write a assembly language instructions to do the following. a.	Read a character and display it at the next position on the same line b.	Read an uppercase letter and display it at the next position on the same line in lower case
+category: Assembly Language Index
+slug: write-instructions-to-do-the-following-read-a-character-and-display-it-at-the-next-position-on-the-same-line
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+### 11. Write instructions to do the following. a.	Read a character and display it at the next position on the same line b.	Read an uppercase letter and display it at the next position on the same line in lower case
+
+```
+.model small
+ .stack 100h
+
+ .data
+    prompt_1  db  'enter the lower case letter : $'
+    prompt_2  db  'the upper case letter is : $'
+
+ .code
+   main proc
+     mov ax, @data                ; initialize ds
+     mov ds, ax
+
+     lea dx, prompt_1             ; load and print prompt_1
+     mov ah, 9
+     int 21h
+
+     mov ah, 1                    ; read a letter
+     int 21h
+
+     mov bl, al                   ; save the letter in bl
+
+     mov ah, 2                    ; return carriage
+     mov dl, 0dh
+     int 21h
+
+     mov dl, 0ah                  ; line feed
+     int 21h
+
+     lea dx, prompt_2             ; load and print prompt_2
+     mov ah, 9
+     int 21h
+
+     sub bl, 20h                  ; convert a lower case letter to upper case letter
+
+     mov ah, 2                    ; print the upper case letter
+     mov dl, bl
+     int 21h
+
+     mov ah, 4ch                  ; return control to dos
+     int 21h
+   main endp
+ end main
+
+```
+
+## Input
+```
+enter the lower case letter: a
+```
+## Output
+```
+the upper case letter is A
+```

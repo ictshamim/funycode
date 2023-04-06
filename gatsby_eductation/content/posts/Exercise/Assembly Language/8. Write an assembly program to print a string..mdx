@@ -1,0 +1,34 @@
+---
+title: Write an assembly language program to print a string
+category: Assembly Language Index
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+
+### 8. Write an assembly program to print a string
+```
+.model small
+.stack 100h
+.data
+msg1 db 13,10,"I am a string$"
+.code
+main proc
+
+ mov ax,@data
+ mov ds,ax
+
+ lea dx,msg1
+ mov ah,9
+ int 21h
+
+ mov ah,4ch
+ int 21h
+ main endp
+ end main
+```
+
+## Output
+```
+I am a string
+```

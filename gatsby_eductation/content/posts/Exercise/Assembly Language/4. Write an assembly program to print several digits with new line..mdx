@@ -1,0 +1,58 @@
+---
+title: Write an assembly language program to print several digits with new line
+category: Assembly Language Index
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+
+### 4. Write an assembly program to print several digits with new line
+```
+.model small
+.stack 100h
+.data
+
+.code
+main proc
+ mov ah,2
+ mov dl,30h
+ int 21h
+
+ mov ah,2
+ mov dl,13
+ int 21h
+
+ mov ah,2
+ mov dl,10
+ int 21h
+
+ mov ah,2
+ mov dl,31h
+ int 21h
+
+ mov ah,2
+ mov dl,13
+ int 21h
+
+ mov ah,2
+ mov dl,10
+ int 21h
+
+ mov ah,2
+ mov dl,32h
+ int 21h
+
+ mov ah,4ch
+ int 21h
+
+ main endp
+ end main
+```
+
+
+## Output
+```
+0
+1
+2
+```

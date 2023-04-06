@@ -1,0 +1,103 @@
+---
+title: Write an Assembly language program to convert Centigrade (Celsius) to Fahrenheit temperature measuring scales.
+slug: write-an-assembly-program-to-convert-centigrade-celsius-to-fahrenheit-temperature-measuring-scales.
+category: Assembly Language Index
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+### 45. Write an Assembly program to convert Centigrade (Celsius) to Fahrenheit temperature measuring scales.
+```
+data segment
+     t    db ?
+     res  db 10 dup ('$')
+     msg1 db "enter temperature in celsius (only in 2 digits) : $"
+     msg2 db 10,13,"converted is fahrenheit (temperature) : $"
+
+data ends
+code segment
+        assume ds:data, cs:code
+start:
+    mov ax,data
+    mov ds,ax
+
+    lea dx,msg1
+    mov ah,9
+    int 21h
+
+    mov ah,1
+    int 21h
+
+    sub al,30h
+    mov ah,0
+
+    mov bl,10
+    mul bl
+    mov bl,al
+
+    mov ah,1
+    int 21h
+
+    sub al,30h
+    mov ah,0
+    add al,bl
+    mov t,al
+
+    mov dl,9
+    mul dl
+
+    mov bl,5
+    div bl
+    mov ah,0
+
+    add al,32
+
+    lea si,res
+    call hex2dec
+
+    lea dx,msg2
+    mov ah,9
+    int 21h
+
+    lea dx,res
+    mov ah,9
+    int 21h
+
+    mov ah,4ch
+    int 21h
+code ends
+
+hex2dec proc near
+    mov cx,0
+    mov bx,10
+
+loop1: mov dx,0
+       div bx
+       add dl,30h
+       push dx
+       inc cx
+       cmp ax,9
+       jg loop1
+
+       add al,30h
+       mov [si],al
+
+loop2: pop ax
+       inc si
+       mov [si],al
+       loop loop2
+       ret
+hex2dec endp
+
+end start
+
+```
+
+## Input
+```
+
+```
+## Output
+```
+
+```

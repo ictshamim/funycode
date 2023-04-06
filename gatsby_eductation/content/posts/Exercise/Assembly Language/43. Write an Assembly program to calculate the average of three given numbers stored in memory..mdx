@@ -1,0 +1,79 @@
+---
+title: Write an Assembly language program to calculate the average of three given numbers stored in memory
+slug: write-an-assembly-program-to-calculate-the-average-of-three-given-numbers-stored-in-memory
+category: Assembly Language Index
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+### 43. Write an Assembly program to calculate the average of three given numbers stored in memory
+```
+.model small
+.data
+        val1    db      ?
+        nl1     db      0ah,0dh,'enter how many no u want:$''
+        nl2     db      0ah,0dh,'enter no:$'
+        nl3     db      0ah,0dh,'avearge:$'
+.code
+main    proc
+        mov ax,@data
+        mov ds,ax
+
+        lea dx,nl1
+        mov ah,09h
+        int 21h
+
+        mov ah,01h
+        int 21h
+        sub al,30h
+
+        mov cl,al
+        mov bl,al
+        mov al,00
+        mov val1,al
+
+lbl1:
+        lea dx,nl2
+        mov ah,09h
+        int 21h
+
+        mov ah,01h
+        int 21h
+        sub al,30h
+
+        add al,val1
+        mov val1,al
+        loop lbl1
+
+lbl2:
+        lea dx,nl3
+        mov ah,09h
+        int 21h
+
+        mov ax,00
+        mov al,val1
+        div bl
+        add ax,3030h
+        mov dx,ax
+        mov ah,02h
+        int 21h
+
+        mov ah,4ch
+        int 21h
+
+main    endp
+        end     main
+
+```
+
+## Input
+```
+enter how many no u want: 3
+enter no: 5
+enter no: 4
+enter no: 3
+```
+## Output
+```
+avearge: 4
+```

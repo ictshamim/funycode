@@ -1,0 +1,42 @@
+---
+title: Write an assembly language count-controlled loop program to display a row of 80 stars.
+slug: write-an-assembly-count-controlled-loop-program-to-display-a-row-of-80-stars
+category: Assembly Language Index
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+### 29. Write an assembly count-controlled loop program to display a row of 80 stars.
+```
+.model small
+.stack 100h
+.data
+mg1 db ?
+mg2 db ?
+.code
+main proc
+
+ mov ax,@data
+ mov ds,ax
+
+ mov cx,80
+ jcxz skip
+ top:
+  mov ah,2
+  mov dl,'*'
+  int 21h
+  loop top
+  jmp skip
+
+  skip:
+ mov ah,4ch
+ int 21h
+
+ main endp
+ end main
+```
+
+## Output
+```
+**********************************************************************
+```

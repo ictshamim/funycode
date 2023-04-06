@@ -1,0 +1,285 @@
+---
+title: Single & Multilevel Inheritance
+category: Cplusplus Tutorial
+author: Anonymous
+tags: ['#C++', '#tutorial']
+date: 2021-01-09
+thumbnailText: C++ Tutorial-23
+---
+## Single Level Inheritance
+A derived class with only one base class, is called single inheritance. When a class extends another one class only then we call it a single inheritance.
+
+### Example-1: Write a C++ program to illustrate single inheritance where subclass publicly inherited the base class.
+~~~js
+//Write a C++ program to illustrate single inheritance where subclass publicly inherited the base class.
+#include <iostream>
+using namespace std;
+class super
+    {
+    int sup_a;
+    public :
+    void sup_input(int x)
+        {
+        sup_a=x;
+        }
+    void sup_show( )
+        {
+        cout<<"sup_a="<<sup_a<<endl;
+        }
+    };
+class sub :public super
+    {
+    };
+
+int main( )
+    {
+    int i;
+    sub o1;
+    cout<<"Enter a data member for class super :=";
+    cin>>i;
+    o1.sup_input(i);
+    o1.sup_show( );
+    }
+~~~
+~~~
+Output:
+Enter a data member for class super :=20
+sup_a=20
+~~~
+### Example-2: Write a C++ program to illustrate another single level inheritance where subclass publicly inherited the base class.
+~~~js
+//Write a C++ program to illustrate single inheritance where subclass publicly inherited the base class.
+#include <iostream>
+using namespace std;
+class super
+    {
+    int sup_a;
+    public :
+    void sup_input( )
+        {
+        cout<<"ENTER THE VALUE FOR SUP_A"<<endl;
+        cin>>sup_a;
+        }
+    void sup_show( )
+        {
+        cout<<"Sup_a="<<sup_a<<endl;
+        }
+    };
+class sub :public super
+{
+int sub_a;
+public :
+    void sub_input( )
+        {
+        sup_input( );
+        cout<<"Enter the value for sub_a"<<endl;
+        cin>>sub_a;
+        }
+    void sub_show( )
+        {
+        sup_show( );
+        cout<<"Sub_a="<<sub_a<<endl;
+        }
+    };
+
+int main( )
+    {
+    sub obj;
+    obj.sub_input( );
+    obj.sub_show( );
+    }
+~~~
+~~~
+Output:
+ENTER THE VALUE FOR SUP_A
+20
+Enter the value for sub_a
+34
+Sup_a=20
+Sub_a=34
+~~~
+
+### Example-3: Write a C++ program to illustrate single level private inheritance .
+~~~js
+//Write a C++ program to illustrate single level private inheritance .
+#include <iostream>
+using namespace std;
+class super
+    {
+    public :
+    void sup_show( )
+        {
+        cout<<"Hello from super"<<endl;
+        }
+    };
+class sub :private super
+    {
+    };
+
+int main( )
+    {
+    sub obj;
+    obj.sup_show( );
+    }
+~~~
+~~~
+Output:
+error: 'void super::sup_show()' is inaccessible|
+~~~
+### Explanation
+- In private inheritance all public members (data & function) becomes private for the derived class. As sup_show of class super becomes private in the sub class it cannot be accessed outside the class.
+
+
+### Example-4: Write a C++ program to illustrate another example Single level private inheritance .
+~~~js
+//Write a C++ program to illustrate another example Single level private inheritance .
+#include <iostream>
+using namespace std;
+class super
+    {
+
+    public :
+    void sup_show( )
+        {
+        cout<<"Hello from super"<<endl;
+        }
+    };
+class sub :private super
+    {
+    public :
+    void sub_show( )
+        {
+        sup_show( );
+        cout<<"Hello from sub"<<endl;
+        }
+    };
+
+int main( )
+    {
+    sub obj;
+    obj.sub_show( );
+    }
+~~~
+~~~
+Output:
+Hello from super
+Hello from sub
+~~~
+
+### Example-5: Write a C++ program to illustrate example Single level protected inheritance .
+~~~js
+//Write a C++ program to illustrate example Single level protected inheritance .
+#include <iostream>
+using namespace std;
+class super
+    {
+
+    public :
+    void show( )
+        {
+        cout<<"hello from super"<<endl;
+        }
+    };
+class sub :protected super
+    {
+    };
+
+int main( )
+    {
+    sub obj;
+    obj.show( );
+    }
+~~~
+~~~
+Output:
+error: 'void super::show()' is inaccessible|
+~~~
+### Example-6: Write a C++ program to illustrate accessing private member in private in inheritance.
+~~~js
+//Write a C++ program to illustrate accessing private member in private in inheritance.
+#include <iostream>
+using namespace std;
+class super
+    {
+    int num;
+    public :
+    void input(int x)
+        {
+        num=x;
+        }
+    int &getnum( )
+        {
+        return num;
+        }
+    void super_show( )
+        {
+        cout<<"Num in class super is"<<num<<endl;
+        }
+    };
+class sub :super
+{
+public :
+void show( )
+    {
+    input(50);
+    cout<<"Num in class sub is"<<getnum( )<<endl;
+    getnum( )=getnum( )*getnum( );
+    super_show( );
+    }
+ };
+
+int main( )
+    {
+    sub obj;
+    obj.show( );
+    }
+~~~
+~~~
+Output:
+Num in class sub is 50
+Num in class super is 2500
+~~~
+### Example-7: Write a C++ program to illustrate multilevel inheritance.
+~~~js
+//Write a C++ program to illustrate multilevel inheritance.
+#include <iostream>
+using namespace std;
+class first
+    {
+    public :
+    void show_f( )
+        {
+        cout<<"Hello from first"<<endl;
+        }
+    };
+class second :public first
+    {
+    public :
+    void show_s( )
+        {
+        cout<<"Hello from second"<<endl;
+        }
+    };
+class third : public second
+    {
+    public :
+    void show_t( )
+        {
+        show_f( );
+        show_s( );
+        cout<<"Hello from third"<<endl;
+        }
+    };
+
+int main( )
+{
+third t;
+t.show_t( );
+}
+~~~
+~~~
+Output:
+Hello from first
+Hello from second
+Hello from third
+~~~

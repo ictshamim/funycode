@@ -1,0 +1,667 @@
+---
+title: Assembly Language Chapter-6 Exercise
+category: Programming Exercise
+author: Anonymous
+tags: ["#Assembly Language", "#tutorial"]
+thumbnailText: Assembly Language Question Exercise
+date: 2020-01-06
+
+
+---
+## Assembly Language Program Exercise
+### Question 1: Write assembly code for each of the following decision structures.
+A)
+```
+IF AX<0
+    THEN
+    PUT -1 IN BX
+  END_IF
+```
+### SOLUTION:
+
+```
+CMP AX, 0 ;condition if(ax<0)
+JL loop_ ;goto loop
+JMP end_if
+Loop_: ;loop:
+MOV BX,-1 ;loop body
+end_if: ;else {}
+;DOS EXIT ;return 0
+```
+B)
+```
+IF AL<0
+THEN
+Put FFh in AH
+ELSE
+Put 0 in AH
+END_IF
+```
+### SOLUTION:
+
+```
+CMP AL,0
+JL loop_
+JMP loop1
+Loop_:
+MOV AH, 0FFh
+JMP end_if
+Loop1:
+MOV AH, 0
+JMP end_if
+end_if:
+;DOS EXIT
+```
+### C) Suppose DL contains the ASCII code of a character.
+```
+(IF DL>= “A”) AND (DL<= “Z”)
+THEN
+Display DL
+END_IF
+```
+### Solution:
+```
+MOV AH,1
+INT 21h
+MOV dl, alCMP dl,"A"
+JGE jump
+JMP exit
+jump:
+CMP DL, 'Z'
+JLE jumpe
+JMP exit
+jumpe:
+MOV AH,2
+INT 21H
+JMP exit
+exit:
+;DOS exit
+```
+D)
+```
+if AX<BX
+THEN
+IF BX<CX
+THEN
+PUT 0 IN AX
+ELSE
+Put 0 in BX
+End_ifEnd_if
+```
+### Solution:
+```
+MOV AX,5
+MOV BX,6
+MOV CX,7
+CMP AX,BX ;if ax is less then bx , then check another condition
+JB label
+JMP end_if
+MOV AX, 0
+Label:
+CMP BX, CX ;if BX<CX satisfies then mov 0 in ax and terminate the code
+JB label2
+MOV BX,0
+JMP end_if
+Label2:
+MOV AX,0
+JMP end_if
+end_if:
+MOV ah,4ch
+INT 21h
+```
+E)
+```
+if(AX<BX) OR (BX<CX)
+Then
+Put 0 in DX
+Else
+Put 1in DX
+End_ifSolution:
+```
+### Solution:
+```
+MOV AX,7
+MOV BX,6
+MOV CX,5
+CMP AX,BX ;if ax is less then bx , mov 0 in dx
+JB label
+CMP BX, CX ; OR if BX<CX satisfies then mov 0 in dx
+JB label
+MOV DX,1 ;else mov 1 in dx
+JMP end_if
+Label:
+MOV DX,0
+JMP end_if
+end_if:
+MOV AH,4ch
+INT 21h
+```
+F)
+```
+if AX<BX
+THEN
+Put 0 in AX
+Else
+If(BX<CX)
+Then
+Put 0 in BX
+Else
+Put 0 in cx
+end_if
+End_if
+```
+### Solution:
+```
+MOV AX,7
+MOV BX,6
+MOV CX,5
+CMP AX,BX ;if ax is less then bx , mov 0 in ax
+JB label
+CMP BX, CX ;else if ax is greater then bx then perform this section
+JB label2 ;if bx<cx , mov 0 in bx
+MOV CX,0 ;else mov 0 in cx
+JMP end_if
+label: ;label
+MOV AX , 0JMP end_if
+Label2: ;label 2
+MOV BX,0
+JMP end_if
+end_if:
+MOV AH,4Ch
+INT 21h
+```
+## Question 2:
+### Use a CASE structure to code the following:
+#### Read a chracter.
+#### If it’s ‘A’, then execute carriage return
+#### If it’s ‘B’, then execute line feed
+#### If it’s any other chracter , then return to DOS
+## ANS:
+```
+MOV AH, 1
+INT 21h
+MOV BL,AL ;reading a character and storing in another register
+CMP Bl, 'A' ;IF character = A
+JE carriage ;jump carriage
+CMP Bl,'B' ;else if character=B
+JE line ;jump to line
+JMP exit ;else exit
+carriage:
+MOV AH,2
+MOV DL, 0Dh
+INT 21h
+MOV DL, BL
+INT 21H
+JMP exit
+line:
+MOV AH,2
+MOV DL, 0Ah
+INT 21H
+MOV DL, BL
+INT 21H
+exit:
+MOV AH,4ch
+INT 21h
+```
+### Question 3:
+### Write a sequence of instruction to code each of the following
+#### A) Put the sum 1+4+7+…+148 in AX
+#### B) Put the sum 100+95+90+…+5 in AX
+### Solution:
+#### A) Put the sum 1+4+7+...+148 in AX main endp
+```
+MOV CX, 49;counter for FOR LOOP
+MOV AX,1 ;adds the sum of series and store the result
+MOV BX,1 ;used to move the series 3 steps forward forward
+Label:
+ADD AX,BX
+ADD BX,3
+LOOP Label
+;DOS exit
+INT 21H
+MOV AH,4CH
+INT 21H
+```
+### B) Put the sum 100+95+90+…+5 in AX
+
+```
+MOV CX, 19;counter for FOR LOOP
+MOV AX,100 ;adds the sum of series and store the result
+MOV BX,100 ;used to move the series 3 steps forward forward
+Label:
+ADD AX,BX
+SUB BX,3
+LOOP Label
+;DOS exit
+INT 21H
+MOV AH,4CH
+INT 21H
+```
+## Question 4:
+### Employee LOOP to do the following:
+#### a) Put the sum of the first 50 terms of the arithmetic sequence 1,5,9,13,… in DX
+#### b) Read a character and display it 80 times on the next line
+#### c) Read a five character password and overprint it by executing a carriage return and display five X’s. you need not store the input characters anywhere.
+
+## a) Put the sum of the first 50 terms of the arithmetic sequence 1,5,9,13,… in DX
+```
+MOV CX,50
+MOV BX,1
+MOV DX,1
+label:
+ADD DX,BX
+ADD BX, 4
+LOOP label
+```
+## b) Read a character and display it 80 times on the next line
+```
+MOV CX, 80
+MOV AH,1INT 21h
+MOV AH,2
+MOV DL,AL
+label:
+INT 21H
+LOOP label
+```
+## c)Read a five character password and overprint it by executing a carriage return and display five X’s. you need not store the input characters anywhere.
+```
+MOV AH,7
+INT 21H
+INT 21H
+INT 21H
+INT 21H
+INT 21H
+MOV AH,2
+MOV DL,0DH
+INT 21H
+MOV CX,5
+LABEL:
+MOV DL,'X'
+INT 21H
+LOOP LABEL
+```
+### Question 5:
+### The following algorithm may be used to carry out division of two non-negative numbers by repeated subtraction ;let AX contains the quotient ;BX contains dividend ;DX contains divisor then
+```
+MOV AX,0
+LABEL:
+CMP BX,DX
+JGE label2
+JMP end
+LABEL2:
+INC AX
+SUB DX,BX
+JMP label
+EXIT:
+;DOS exit
+```
+### Question 6:
+## The following algorithm may be used to carry out multiplication of two positive numbers M and N by repeated addition:
+```
+Initialize product to 0
+Repeat
+Add m to product
+Decrement N
+Untill n=0Write a sequence of instructions to multiplay AX by BX and put the product in CX. You may ignore the possibility of overflow
+Let ax contains the product
+```
+```
+MOV CX,0
+LABEL:
+ADD CX,AX
+DEC BX
+CMP BX,0
+JNE label
+```
+### Question 7:
+#### It is possible to setup a count controlled loop that will continue to execute as long as some condition is satisfied. Using LOOPE, LOOPZ,
+#### LOOPNE, LOOPNZ do the following :
+#### a) Write instructions to read characters until either a non blank character is typed , or 80 characters have been typed. Use LOOPE
+#### b) Write instructions to read characters until either a carriage return is typed , or 80 characters have been typed. Use LOOPNE
+#### c) Write instructions to read characters until either a non blank character is typed , or 80 characters have been typed. Use LOOPE
+
+### a) Write instructions to read characters until either a non blank character is typed , or 80 characters have been typed. Use LOOPE
+```
+MOV CX,80
+MOV AH,1
+Label:
+INT 21h
+CMP AL, 20h
+LOOPE EXIT
+LOOP LABEL
+EXIT:
+MOV AH,4CH
+INT 21H
+```
+### b) Write instructions to read characters until either a carriage return is typed , or 80 characters have been typed. Use LOOPNE
+```
+MOV CX,80
+MOV AH,1
+Label:
+INT 21h
+CMP AL, 0Dh
+LOOPNE LABEL
+EXIT:
+MOV AH,4CH
+INT 21H
+```
+## Question 8:
+### Write a program to display a “?”, read two capital letters, and display them on the next line in alphabetical order.CODE:
+```
+.MODEL SMALL
+.STACK 100h
+.DATA
+ms db 'Enter two letters $'
+ch1 DB ?
+ch2 DB ?
+.CODE
+MAIN PROC
+MOV AX,@data
+MOV DS, AX
+;prompt the user
+MOV AH, 9
+LEA DX, ms
+INT 21h
+; read two characters
+MOV AH, 1
+INT 21h
+MOV ch1,AL
+INT 21h
+MOV ch2, AL
+;comparing the values
+CMP ch1, AL
+JB ascending
+JA descending
+JMP exit
+ascending:
+MOV AH,2
+MOV DL, ch1
+INT 21h
+MOV DL, ch2
+INT 21H
+JMP exit
+descending:
+MOV AH,2
+MOV DL, ch2
+INT 21h
+MOV DL, ch1
+INT 21H
+JMP exit
+exit:
+MOV ah,4ch
+INT 21h
+MAIN ENDP
+END MAIN
+```
+## Question 9:
+### Write a program to display the extended ASCII characters (ASCII codes 80h to FFh). display 10 characters per line, separated by blanks. Stop after the extended characters have been displayed once.
+## Solution:
+```
+.MODEL SMALL
+.STACK 100h
+.DATA
+.CODE
+MAIN PROC
+;prompt the user
+MOV AH, 2
+MOV CL, 0 ;for space
+MOV DL, 80H ;initializing dl and bl to character at address 80h
+MOV BL,80h
+WHILE_:
+MOV DL,BL ;restoring in dl for displaying
+INT 21H
+CMP DL, 0FFh
+JE exit
+INC Dl
+MOV BL,DL ;temporarily storing dl
+MOV DL,20h ;for space
+INT 21h
+INC CL ;incrementing in char for space
+CMP cl, 10
+JE line
+MOV DL,BL
+JMP WHILE_
+line:
+MOV dl,0ah
+INT 21h
+MOV dl,0dh
+INT 21h
+MOV cl,0
+JMP while_
+exit:
+MOV ah,4chINT 21h
+MAIN ENDP
+END MAIN
+```
+
+## Question 10:
+### Write a program that will prompt the user to enter a hex digit character (“0”, … , “9” or “A”, … , “”F”), display it on the next line in decimal and ask the user if he want to do it again. If the user types “y” or “Y”, the program repeats; if the user types anything else, the program terminates, if the user enters an illegal character, prompt the user to try again.
+## Solution:
+```
+CODE:
+.MODEL SMALL
+.STACK 100h
+.DATA
+msg DB 0AH,0DH,'Enter a hex character from ‘0’,…, ‘9’ or ‘A’,…, ‘F’$'
+ch1 DB ?
+ch2 DB ?
+msg1 DB 0AH,0DH,"in decimal it is "
+ch3 DB ?, "$"
+msg2 DB 0AH,0DH,"In decimal it is: 1"
+C2 DB ?,'$ '
+msg3 DB 0AH,0DH,"do you want to check more results?",0ah,0dh,"type y for
+yes , n for no "
+c3 DB ?, "$"
+msg4 DB 0AH,0DH,"invlaid input try again $"
+.CODE
+MAIN PROC
+MOV AX,@DATA
+MOV DS, AX
+again:
+;prompt the userMOV AH, 9
+LEA dx, msg
+INT 21h
+; read a character
+MOV AH, 1
+INT 21h
+MOV ch1,AL
+;CHECKING the hex character
+CMP ch1, 39h ;39h=9
+JBE dig
+CMP ch1, 46h ;46H=F
+JBE character
+MOV AH,9
+LEA DX, msg4
+INT 21h
+JMP again
+input:
+;if user want to take next input
+MOV AH,9
+LEA DX,msg3
+INT 21h
+MOV AH,1
+INT 21h
+MOV c3, AL
+CMP c3, 'y'
+JE again
+CMP c3, 'Y'
+JE again
+JMP exit
+character:
+;CALCULATION for hex character
+SUB AL, 11h
+MOV C2,AL
+MOV AH,9
+LEA DX, msg2
+INT 21H
+JMP input
+dig:
+MOV AH,9
+LEA DX, msg1
+INT 21hMOV AH,2
+MOV DL, ch1
+INT 21H
+JMP input
+exit:
+MOV ah,4ch
+INT 21h
+MAIN ENDP
+END MAIN
+```
+## Question 11:
+### Do programming exercise 10, except that if the user fails to enter a hex-digit character in three tries, display a message and terminates the program.
+#### CODE:
+```
+.MODEL SMALL
+.STACK 100h
+.DATA
+msg DB 0AH,0DH,'Enter a hex character $'
+ch1 DB ?
+ch2 DB ?
+msg1 DB 0AH,0DH,"in decimal it is "
+ch3 DB ?, "$"
+msg2 DB 0AH,0DH,"In decimal it is: 1"
+C2 DB ?,'$ '
+msg3 DB 0AH,0DH,"do you want to check more results?",0ah,0dh,"type y
+for yes , n for no "
+c3 DB ?, "$"msg4 DB 0AH,0DH,"invalid input! $"
+msg5 DB 0AH,0DH ,"Entered invalid input for three times! $"
+.CODE
+MAIN PROC
+MOV AX,@DATA
+MOV DS, AX
+MOV BL,0
+again:
+;prompt the user
+MOV AH, 9
+LEA DX, msg
+INT 21h
+; read a character
+MOV AH, 1
+INT 21h
+MOV ch1,AL
+;CHECKING the hex character
+CMP ch1, 39h ;39h=9
+JBE dig
+CMP ch1, 46h ;46H=F
+JBE character
+MOV AH,9
+LEA DX, msg4 ;invalid input try again
+INT 21h
+INC bl
+CMP BL,3
+JE DISP
+JMP again
+DISP:
+MOV AH,9
+LEA DX, msg5
+INT 21h
+JMP exit
+input:
+;if user want to take next input
+MOV AH,9
+LEA DX,msg3
+INT 21h
+MOV AH,1
+INT 21h
+MOV c3, AL
+CMP c3, 'y'
+JE again
+CMP c3, 'Y'
+JE againJMP exit
+character:
+;CALCULATION for hex character
+SUB AL, 11h
+MOV C2,AL
+MOV AH,9
+LEA DX, msg2
+INT 21H
+JMP input
+dig:
+MOV AH,9
+LEA DX, msg1
+INT 21h
+MOV AH,2
+MOV DL, ch1
+INT 21H
+JMP input
+exit:
+MOV ah,4ch
+INT 21h
+MAIN ENDP
+END MAIN
+```
+## Question 12:
+### Write a program that reads a string of capital letters , ending with carriage return and display the longest sequence of consecutive alphabetically increasing capital letters read.
+#### CODE:
+
+```
+.STACK 100h
+.MODEL small
+.DATA
+inputmsg DB 'Enter a string of capital etters: $'
+outputmsg DB 0dh, 0Ah, 'The longest consecutive increasing string is: $ '
+.CODEMAIN PROC
+MOV AX, @DATA
+MOV DS,AX
+MOV CH,0 ;ch
+MOV AH,9 ;dislaying input message
+LEA DX,inputmsg
+INT 21H
+INPUT_1:
+MOV AH,1
+INT 21H
+CMP AL, 0DH
+JE end_
+MOV CL,1
+MOV BL,AL
+MOV DH, AL
+INPUT_2:
+INT 21H
+CMP AL,0dh
+JE END_
+INC bl
+CMP BL,AL
+JNE init
+INC cl
+JMP input_2
+INIT:
+CMP CH, CL
+JL update
+MOV CL,1
+MOV BL,AL
+MOV DH,AL
+JMP input_2
+update:
+MOV ch,cl
+MOV bh,dh
+MOV cl,1
+MOV bl,al
+MOV dh,al
+MOV input_2
+end_:
+CMP CH,CL
+JL Reupdate
+JMP end_2
+reupdate:
+MOV CH,CL
+MOV BH,DH
+JMP end_2
+end_2:
+MOV ah,9Lea dx, outputmsg
+INT 21h
+MOV ah,2
+MOV dl, bh
+output:
+CMP ch, 0
+JE finish
+DEC ch
+INT 21h
+INC dl
+JMP output
+finish:
+MOV ah,4ch
+INT 21h
+main endp
+end main
+```

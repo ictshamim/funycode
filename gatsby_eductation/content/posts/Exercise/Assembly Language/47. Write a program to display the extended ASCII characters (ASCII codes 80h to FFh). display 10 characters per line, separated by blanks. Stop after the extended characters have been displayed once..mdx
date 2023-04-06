@@ -1,0 +1,56 @@
+---
+title:  Write a assembly language program to display the extended ASCII characters (ASCII codes 80h to FFh). display 10 characters per line, separated by blanks. Stop after the extended characters have been displayed once.
+slug: write-a-program-to-display-the-extended-ascii-characters-ascii-codes-80h-to-ffh-display-10-characters-per-line-separated-by-blanks.-stop-after-the-extended-characters-have-been-displayed-once.
+category: Assembly Language Index
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+### 47. Write a program to display the extended ASCII characters (ASCII codes 80h to FFh). display 10 characters per line, separated by blanks. Stop after the extended characters have been displayed once.
+```
+.MODEL SMALL
+.STACK 100h
+.DATA
+.CODE
+MAIN PROC
+;prompt the user
+MOV AH, 2
+MOV CL, 0 ;for space
+MOV DL, 80H ;initializing dl and bl to character at address 80h
+MOV BL,80h
+WHILE_:
+MOV DL,BL ;restoring in dl for displaying
+INT 21H
+CMP DL, 0FFh
+JE exit
+INC Dl
+MOV BL,DL ;temporarily storing dl
+MOV DL,20h ;for space
+INT 21h
+INC CL ;incrementing in char for space
+CMP cl, 10
+JE line
+MOV DL,BL
+JMP WHILE_
+line:
+MOV dl,0ah
+INT 21h
+MOV dl,0dh
+INT 21h
+MOV cl,0
+JMP while_
+exit:
+MOV ah,4ch
+INT 21h
+MAIN ENDP
+END MAIN
+```
+
+## Input
+```
+
+```
+## Output
+```
+
+```

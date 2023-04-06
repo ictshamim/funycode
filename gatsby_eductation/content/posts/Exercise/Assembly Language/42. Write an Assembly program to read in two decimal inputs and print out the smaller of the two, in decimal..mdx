@@ -1,0 +1,66 @@
+---
+title: Write an Assembly language program to read in two decimal inputs and print out the smaller of the two, in decimal.
+slug: write-an-assembly-program-to-read-in-two-decimal-inputs-and-print-out-the-smaller-of-the-two-in-decimal.
+category: Assembly Language Index
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+### 42. Write an Assembly program to read in two decimal inputs and print out the smaller of the two, in decimal.
+```
+.model small
+.stack 100h
+.data
+mg1 db ?
+mg2 db ?
+.code
+main proc
+
+ mov ax,@data
+ mov ds,ax
+
+ mov ah,1
+ int 21h
+ sub al,30h
+ mov mg1,al
+
+ mov ah,1
+ int 21h
+ sub al,30h
+ mov mg2,al
+
+ cmp al,mg1
+ jg greater
+ jl less
+
+ less:
+ mov ah,2
+ add mg1,30h
+ mov dl,mg1
+ int 21h
+ jmp exit
+
+ greater:
+ mov ah,2
+ add mg2,30h
+ mov dl,mg2
+ int 21h
+ jmp exit
+
+ exit:
+ mov ah,4ch
+ int 21h
+
+ main endp
+ end main
+```
+
+## Input
+```
+2
+3
+```
+## Output
+```
+2
+```

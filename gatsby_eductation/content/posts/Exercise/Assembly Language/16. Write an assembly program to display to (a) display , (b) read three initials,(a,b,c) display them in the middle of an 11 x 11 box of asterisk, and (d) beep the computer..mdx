@@ -1,0 +1,118 @@
+---
+title: Write an assembly language program to display to (a) display"?", (b) read three initials,(a,b,c) display them in the middle of an 11 x 11 box of asterisk, and (d) beep the computer
+slug: write-an-assembly-program-to-display-to-display-read-three-initials-display-them-in-the-middle-of-an-11-x-11-box-of-asterisk-and-beep-the-computer
+category: Assembly Language Index
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+### 16. Write an assembly program to display to (a) display"?", (b) read three initials,(a,b,c) display them in the middle of an 11 x 11 box of asterisk, and (d) beep the computer
+```
+.model small
+.stack 100h
+.data
+msg1 db 13,10,"**********$"
+msg3 db "***$"
+
+.code
+main proc
+
+ mov ax,@data
+ mov ds,ax
+
+ mov ah,1
+ int 21h
+ mov bl,al
+
+ mov ah,1
+ int 21h
+ mov cl,al
+
+ mov ah,1
+ int 21h
+
+ mov bh,al
+
+ lea dx,msg1
+ mov ah,9
+ int 21h
+
+
+ lea dx,msg1
+ mov ah,9
+ int 21h
+
+ lea dx,msg1
+ mov ah,9
+ int 21h
+
+ lea dx,msg1
+ mov ah,9
+ int 21h
+
+ lea dx,msg1
+ mov ah,9
+ int 21h
+
+ mov ah,2
+ mov dl,13
+ int 21h
+
+ mov ah,2
+ mov dl,10
+ int 21h
+
+ lea dx,msg3
+ mov ah,9
+ int 21h
+
+ mov ah,2
+ mov dl,bl
+ int 21h
+
+ mov ah,2
+ mov dl,cl
+ int 21h
+
+ mov ah,2
+ mov dl,bh
+ int 21h
+
+
+ lea dx,msg3
+ mov ah,9
+ int 21h
+
+ lea dx,msg1
+ mov ah,9
+ int 21h
+
+ lea dx,msg1
+ mov ah,9
+ int 21h
+
+ mov ah,2
+ mov dl,07h
+ int 21h
+
+ mov ah,4ch
+ int 21h
+
+ main endp
+ end main
+```
+
+## Input
+```
+abc
+```
+## Output
+```
+***********
+***********
+***********
+***********
+****abc****
+***********
+***********
+```

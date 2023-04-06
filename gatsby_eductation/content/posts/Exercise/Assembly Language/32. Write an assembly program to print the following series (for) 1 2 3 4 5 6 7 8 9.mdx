@@ -1,0 +1,52 @@
+---
+title: Write an assembly language program to print the following series (for) 1 2 3 4 5 6 7 8 9
+slug: write-an-assembly-program-to-print-the-following-series-for-1-2-3-4-5-6-7-8-9
+category: Assembly Language Index
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+### 32. Write an assembly program to print the following series (for) 1 2 3 4 5 6 7 8 9
+
+```
+.model small
+.stack 100h
+.data
+mg1 db ?
+mg2 db ?
+.code
+main proc
+
+ mov ax,@data
+ mov ds,ax
+
+
+
+        MOV BL,00H
+        MOV CH,00H
+        MOV CL,0AH
+
+
+    L1   :
+        MOV DH,00H
+        MOV DL,BL
+        ADD DL,'0'
+
+        MOV AH,02H
+        INT 21H
+
+        INC BL
+        LOOP L1
+
+        mov ah,4ch
+        int 21h
+
+ main endp
+ end main
+
+```
+
+## Output
+```
+1 2 3 4 5 6 7 8 9
+```

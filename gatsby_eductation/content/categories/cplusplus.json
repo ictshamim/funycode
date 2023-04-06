@@ -1,0 +1,6 @@
+{
+  "name": "Cplusplus Tutorial",
+  "icon": "cplusplus.svg",
+  "color": "#663399",
+  "description": "C++ is an object-oriented programming language. It was developed by Bjarne Stroustrup at AT&T Bell Laboratories in New Jersey, USA, in the early 1980’s. OOPs makes development and maintenance easier where as in Procedure-oriented programming language is not easy to manage if code grows as project size grows. The OOP concepts are abstraction, encapsulation, inheritance, and polymorphism."
+}

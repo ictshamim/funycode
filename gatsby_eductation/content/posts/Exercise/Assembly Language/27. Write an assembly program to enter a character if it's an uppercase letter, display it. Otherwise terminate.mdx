@@ -1,0 +1,47 @@
+---
+title: Write an assembly language program to enter a character if it's an uppercase letter, display it, Otherwise terminate
+slug: write-an-assembly-program-to-enter-a-character-if-its-an-uppercase-letter-display-it-otherwise-terminate
+category: Assembly Language Index
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+### 27. Write an assembly program to enter a character if it's an uppercase letter, display it. Otherwise terminate
+
+```
+.MODEL SMALL
+.STACK 100H
+.DATA
+.CODE
+MAIN PROC
+
+    MOV AH,1
+    INT 21H
+
+    CMP AL,'A'
+    JB ELSE_
+    CMP AL,'Z'
+    JA ELSE_
+    ;THEN:
+    MOV AH,2
+    MOV DL,AL
+    INT 21H
+
+ELSE_:
+
+END_IF:
+    MOV AH,4CH
+    INT 21H
+
+MAIN ENDP
+END MAIN
+```
+
+## Input
+```
+A
+```
+## Output
+```
+A
+```

@@ -1,0 +1,66 @@
+---
+title: Write an assembly language program to enter value of Al, If AL contains 1 or 3, display "o"; if AL contains 2 or 4, display "e".
+slug: write-an-assembly-program-to-enter-value-of-al-if-al-contains-1-or-3-display-if-al-contains-2-or-4-display-e
+category: Assembly Language Index
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+### 26. Write an assembly program to enter value of Al, If AL contains 1 or 3, display "o"; if AL contains 2 or 4, display "e".
+
+```
+.model small
+.stack 100h
+.data
+mg1 db ?
+mg2 db ?
+.code
+main proc
+
+ mov ax,@data
+ mov ds,ax
+
+ mov ah,1
+ int 21h
+ sub al,30h
+ mov mg1,al
+
+ cmp al,1
+ je odd
+ cmp al,3
+ je odd
+
+ cmp al,2
+ je even_
+ cmp al,4
+ je even_
+
+
+ odd:
+ mov ah,2
+ mov dl,'o'
+ int 21h
+ jmp exit
+
+ even_:
+ mov ah,2
+ mov dl,'e'
+ int 21h
+ jmp exit
+
+ exit:
+ mov ah,4ch
+ int 21h
+
+ main endp
+ end main
+```
+
+## Input
+```
+1
+```
+## Output
+```
+o
+```

@@ -1,0 +1,77 @@
+---
+title: Write a assembly language program that prompts the user to enter a character on subsequent lines prints its ASCII code in binary the number of 1 bits in its ASCII code
+slug: write-a-program-that-prompts-the-user-to-enter-a-character-on-subsequent-lines-prints-its-ascii-code-in-binary-the-number-of-1-bits-in-its-ascii-code
+category: Assembly Language Index
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+### 51. Write a program that prompts the user to enter a character on subsequent lines prints its ASCII code in binary the number of 1 bits in its ASCII code
+```
+.MODEL SMALL
+.STACK 100H
+.DATA
+M1 DB 'TYPE A CHARACTER ','$'
+M2 DB 0AH , 0DH, 'THE ASCII CODE OF '
+C1 DB ?, 'IN BINARY IS:','$'
+M3 DB 0AH, 0DH, 'THE NUMBER OF 1 BITS IS'
+C2 DB ?, '$'
+C3 DB ?
+.CODE
+MAIN PROC
+;DATA SEGMENT INITIALIZATION
+MOV AX, @DATA
+MOV DS, AX
+;DISPLAYING MESSAGE M1
+MOV AH,9
+LEA DX,M1
+INT 21H
+;TAKING CHARACTER INPUT
+MOV AH,1
+INT 21H
+MOV C1,AL ;FOR ASCII CONVERSION
+MOV C3,AL ;FOR NO. OF 1 BITS
+;ASCII CONVERSION
+MOV AH,9
+LEA DX, M2
+INT 21H
+MOV AH,2
+MOV CX,8
+TOP:
+SHL C1,1
+JC SET
+MOV DL,'0'
+INT 21H
+JMP LABEL
+SET:
+MOV AH,2
+MOV DL,'1'
+INT 21H
+JMP TOP
+LABEL:
+LOOP TOP
+;NUMBER OF 1 BITS
+MOV AH,9
+LEA DX,M3
+INT 21H
+MOV AL,0
+MOV CX, 8
+TOP1:
+ROL C3,1
+JNC NEXT
+INC AL
+NEXT:
+LOOP TOP1
+MOV AH,2
+MOV DL,AL
+ADD DL,30H
+INT 21H
+;DOS EXIT
+MOV AH,4CH
+INT 21H
+MAIN ENDP
+END MAIN
+
+
+```
+

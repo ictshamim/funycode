@@ -1,0 +1,166 @@
+---
+title: Virtual Function in Cplusplus
+category: Cplusplus Tutorial
+author: Anonymous
+tags: ['#C++', '#tutorial']
+date: 2021-01-05
+thumbnailText: C++ Tutorial-27
+---
+## Virtual Function in C++
+A virtual function is a member function that you except to be redefined in derived classes. When you refer to a derived class object using a pointer or a reference to the base class, you can call a virtual function for that object and execute the derived class’s version of the function.
+
+- It is a run time polymorphism.
+- Base class and derived class have same function name and base class pointer is assigned address of derived class object then also pointer will execute base class function.
+- To execute function of derived class, we have to declare function of base class as virtual.
+- To declare virtual function just uses keyword virtual preceding its normal function declaration.
+- After making virtual function, the compiler will determine which function to execute at run time on the basis of assigned address to pointer of base class.
+## Rules For Virtual Function
+- There are some rules for using virtual functions. You must keep these rules in your mind when you are dealing with virtual functions failing which compiler may flash errors. The rules are :
+- They cannot be declared outside the class i.e., must be member of some class.
+- They can be called using object pointers and even using objects but actual works can be seen only with pointers.
+- They cannot be declared as static.
+- Virtual constructor is not possible but we can have virtual destructor.
+- A virtual function can be friend to another class.
+- Making a virtual function in base class is simply a choice for the derived class. The derived class may or may not override virtual function of the base class.
+- In the absence of virtual keyword, the function to be invoked is determined by the type of pointer. The compiler does not check what type of object is stored in the pointer.
+- When virtual keyword is present, functions are called on the basis of which type of object pointer hold in it.
+- Never use ++ or – – operator on pointer of base class pointer to get the next object of derived class. It will only forward/backward the pointer relative to its own class type.
+- Pointers follow the hierarchy of inheritance and pay regards to the older. That is, we can store in a pointer of base class address of any derived class object, but in a pointer of derived class we cannot store object of first class.
+### Example-1: Write a C++ program to illustrate virtual function.
+~~~js
+//Write a C++ program to illustrate virtual function.
+#include<iostream>
+using namespace std;
+class first
+    {
+    public :
+    virtual void show( )
+        {
+        cout<<"Hello from show of first class"<<endl;
+        }
+    };
+class second :public first
+    {
+    public :
+    void show( )
+        {
+        cout<<"Hello from show of second class"<<endl;
+        }
+    };
+int main( )
+    {
+    first *ptr;
+    first f;
+    second s;
+    ptr =&f;
+    ptr->show( );
+    ptr =&s;
+    ptr->show( );
+    }
+~~~
+~~~
+Output:
+Hello from show of first class
+Hello from show of second class
+~~~
+### Example-2: Write a C++ program to illustrate another example of virtual function.
+~~~js
+//Write a C++ program to illustrate another example of virtual function.
+#include<iostream>
+using namespace std;
+class first
+    {
+    public :
+    virtual void show( )
+        {
+        cout<<"Hello from show of first class"<<endl;
+        }
+    void display( )
+        {
+        cout<<"Hello from display of first class"<<endl;
+        }
+    };
+class second :public first
+    {
+    public :
+    void show( )
+        {
+        cout<<"Hello from show of second class"<<endl;
+        }
+    void display( )
+        {
+        cout<<"Hello from display of second class"<<endl;
+        }
+    };
+int main( )
+    {
+    first *ptr;
+    first f;
+    second s;
+    ptr=&f;
+    ptr->show( );
+    ptr->display( );
+    ptr=&s;
+    ptr->show( );
+    ptr->display( );
+    }
+~~~
+~~~
+Output:
+Hello from show of first class
+Hello from display of first class
+Hello from show of second class
+Hello from display of first class
+~~~
+### Example-3: Write a C++ program to illustrate another example of virtual function.
+~~~js
+//Write a C++ program to illustrate another example of virtual function.
+#include<iostream>
+using namespace std;
+class first
+    {
+    public :
+    void show( )
+    {
+    cout<<"Hello from show of first class"<<endl;
+    }
+    };
+class second : public first
+    {
+    public :
+    virtual void show( )
+    {
+    cout<<"Hello from show of second class"<<endl;
+    }
+    };
+class third :public second
+    {
+    public :
+    void show( )
+        {
+        cout<<"Hello from show of third class"<<endl;
+        }
+    };
+int main( )
+    {
+    first *fptr;
+    first f;
+    second s, *sptr;
+    third t;
+    fptr=&f;
+    fptr->show( );
+    fptr=&s;
+    fptr->show( );
+    sptr=&s;
+    sptr->show( );
+    sptr=&t;
+    sptr->show( );
+    }
+~~~
+~~~
+Output:
+Hello from show of first class
+Hello from show of first class
+Hello from show of second class
+Hello from show of third class
+~~~

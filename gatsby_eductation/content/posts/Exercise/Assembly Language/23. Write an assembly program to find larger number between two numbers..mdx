@@ -1,0 +1,60 @@
+---
+title: Write an assembly language program to find larger number between two numbers.
+slug: write-an-assembly-program-to-find-larger-number-between-two-numbers
+category: Assembly Language Index
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+### 23. Write an assembly program to find larger number between two numbers.
+```
+.model small
+.stack 100h
+.data
+num1 db ?
+num2 db ?
+.code
+main proc
+mov ax,@DATA
+mov ds,ax
+
+ mov ah,1
+ int 21h
+ sub al,30h
+ mov num1,al
+
+ mov ah,1
+ int 21h
+ sub al,30h
+
+ cmp al,num1
+
+ jg grt
+ mov ah,2
+ add num1,30h
+ mov dl,num1
+ int 21h
+ jmp exit
+
+ grt:
+ mov ah,2
+ add al,30h
+ mov dl,al
+ int 21h
+ exit:
+ mov ah,4ch
+ int 21h
+
+ main endp
+ end main
+```
+
+## Input
+```
+4
+5
+```
+## Output
+```
+5
+```

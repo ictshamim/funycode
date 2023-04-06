@@ -1,0 +1,21 @@
+{
+  "name": "S.M. Shamim",
+  "title": "Assistant Professor",
+  "description": "I am a programmer and I like to do programming. I have completed my Bachelor of Science (B.Sc Engg.) and Master of Science (M.Sc Engg.) from a reputed university. During my study I have realized the importance of programming.",
+  "thumbnail": "jane-smith.png",
+  "social": [
+    {
+      "name": "Instagram",
+      "url": "https://instagram.com/instagram"
+    },
+    {
+      "name": "Twitter",
+      "url": "https://twitter.com/twitter"
+    },
+    {
+      "name": "Website",
+      "url": "https://funycode.com"
+    }
+  ],
+  "skills": ["C", "C++", "Java"]
+}

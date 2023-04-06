@@ -1,0 +1,217 @@
+---
+title: Constructor and Destructor in Inheritance
+category: Cplusplus Tutorial
+author: Anonymous
+tags: ['#C++', '#tutorial']
+date: 2021-01-06
+thumbnailText: C++ Tutorial-26
+---
+## Constructor and Destructor in Inheritance
+Assume a small example of single level inheritance in which class A is inherited by class B.
+
+- Both the classes have their default constructors.
+- When an object of class B is created, it calls the constructor of class B, but as this class B has got A as its parent class, constructor of class A will be called first, then constructor of class then obviously it will be using the data members from base class.
+- Now without calling the constructor of base class, data members of base class, unexpected results may follow.
+- Calling a constructor of base class first allows base class to properly set up its data members of that they can be used by derived classes.
+- In case of destructor in inheritance, destructor of derived class is called first and then destructor of base class is called.
+- This is so as it is possible that if we call destructor of base class first, destructor might be working with data members of base class.
+- So, destroying them in base class has an effect of working with the data members that no longer exist. Compiler won’t allow this.
+- That’s why destructor class call as first so that it can do its works finishing with any of the data members of class base and do its own cleaning.
+### Example-1: Write a C++ program to illustrate the constructor in single level inheritance.
+~~~js
+//Write a C++ program to illustrate inheritance in single level inheritance.
+#include <iostream>
+using namespace std;
+class first
+    {
+    public :
+    first( )
+        {
+        cout<<"Hello from con of first"<<endl;
+        }
+    };
+class second :public first
+    {
+    public :
+    second( ) :first( )
+        {
+        cout<<"Hello from con of second"<<endl;
+        }
+    };
+int main( )
+    {
+    second s;
+    }
+~~~
+~~~
+Output:
+Hello from con of first
+Hello from con of second
+~~~
+### Example-2: Write a C++ program to illustrate the  constructor and destructor in single level inheritance.
+~~~js
+//Write a C++ program to illustrate the  constructor and destructor in single level inheritance.
+#include <iostream>
+using namespace std;
+class first
+{
+public :
+first( )
+        {
+        cout<<"Hello from con"<<endl;
+        }
+        ~first( )
+        {
+        cout<<"Bye Bye from des of first "<<endl;
+        }
+    };
+class second : public first
+    {
+    public :
+    second( ) :first( )
+        {
+        cout<<"Hello from con of second"<<endl;
+        }
+    ~second( )
+        {
+        cout<<"Bye Bye from des of second"<<endl;
+        }
+    };
+int main( )
+    {
+    second s;
+    }
+~~~
+~~~
+Output:
+Hello from con
+Hello from con of second
+Bye Bye from des of second
+Bye Bye from des of first
+~~~
+### Example-3: Write a C++ program to illustrate the  constructor in multi level inheritance.
+~~~js
+//Write a C++ program to illustrate the  constructor and destructor in multi level inheritance.
+#include <iostream>
+using namespace std;
+class first
+    {
+    public :
+    first( )
+        {
+        cout<<"Hello from con of first"<<endl;
+        }
+    };
+class second :public first
+    {
+    public :
+    second ( ) : first( )
+        {
+        cout<<"Hello from con of second "<<endl;
+        }
+    };
+class third : second
+    {
+    public :
+    third( ) :second ( )
+        {
+        cout<<"Hello from con of third"<<endl;
+        }
+    };
+int main( )
+    {
+    third t;
+    }
+~~~
+~~~
+Output:
+Hello from con of first
+Hello from con of second
+Hello from con of third
+~~~
+### Example-4: Write a C++ program to illustrate the  constructor  in multiple level inheritance.
+~~~js
+//Write a C++ program to illustrate the  constructor  in multiple level inheritance.
+#include <iostream>
+using namespace std;
+class first
+    {
+    public :
+    first ( )
+        {
+        cout<<"Hello from con first"<<endl;
+        }
+    };
+class second
+    {
+    public :
+    second( )
+        {
+        cout<<"Hello from con of second"<<endl;
+        }
+    };
+class third :second, first
+    {
+    public :
+    third( )
+        {
+        cout<<"Hello from con of third"<<endl;
+        }
+    };
+int main( )
+    {
+    third t;
+    }
+~~~
+~~~
+Output:
+Hello from con of second
+Hello from con first
+Hello from con of third
+~~~
+### Example-5: Write a C++ program to illustrate the parametrized constructor  in inheritance.
+~~~js
+//Write a C++ program to illustrate the parametrized constructor  in inheritance.
+#include<iostream>
+using namespace std;
+class first
+{
+int fa;
+public :
+first (int x)
+        {
+        fa=x;
+        cout<<"Con of first called"<<endl;
+        }
+    void fshow( )
+        {
+        cout<<"fa="<<fa<<endl;
+        }
+    };
+class second :public first
+{
+int sa;
+public :
+second (int a) : first (a%10), sa(a/10)
+    {
+    cout<<"Con of second called"<<endl;
+    }
+    void sshow( )
+        {
+        fshow( );
+        cout<<"sa="<<sa<<endl;
+        }
+    };
+int main( )
+    {
+    second s(234);
+    s.sshow( );
+    }
+~~~
+~~~
+Output:
+Con of first called
+Con of second called
+fa=4
+sa=23
+~~~

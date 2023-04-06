@@ -1,0 +1,81 @@
+---
+title: Write an assembly language program to enter two 8 bit numbers and print their sum which is larger than 9.
+slug: write-an-assembly-program-to-enter-two-8-bit-numbers-and-print-their-sum-which-is-larger-than-9
+category: Assembly Language Index
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+### 19. Write an assembly program to enter two 8 bit numbers and print their sum which is larger than 9.
+```
+.model small
+.stack 100h
+.data
+NUM1 DB ?
+NUM2 DB ?
+RESULT DB ?
+MSG1 DB 10,13,"ENTER FIRST NUMBER TO ADD : $"
+MSG2 DB 10,13,"ENTER SECOND NUMBER TO ADD : $"
+MSG3 DB 10,13,"RESULT OF ADDITION IS : $"
+.code
+main proc
+MOV AX,@DATA
+MOV DS,AX
+
+LEA DX,MSG1
+MOV AH,9
+INT 21H
+
+MOV AH,1
+INT 21H
+;SUB AL,30H
+MOV NUM1,AL
+
+LEA DX,MSG2
+MOV AH,9
+INT 21H
+
+MOV AH,1
+INT 21H
+;SUB AL,30H
+MOV NUM2,AL
+
+ADD AL,NUM1
+MOV RESULT,AL
+
+MOV AH,0
+AAA
+
+ADD AH,30H
+ADD AL,30H
+
+MOV BX,AX
+
+LEA DX,MSG3
+MOV AH,9
+INT 21H
+
+MOV AH,2
+MOV DL,BH
+INT 21H
+
+MOV AH,2
+MOV DL,BL
+INT 21H
+
+MOV AH,4CH
+INT 21H
+
+main endp
+end main
+```
+
+## Input
+```
+ENTER FIRST NUMBER TO ADD: 8
+ENTER SECOND NUMBER TO ADD:9
+```
+## Output
+```
+RESULT OF ADDITION IS : 17
+```

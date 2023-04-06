@@ -1,0 +1,126 @@
+---
+title: Write an Assembly language program in which a procedure converts Hexadecimal value to print its Decimal form on Screen.
+slug: write-an-assembly-program-in-which-a-procedure-converts-hexadecimal-value-to-print-its-decimal-form-on-screen.
+category: Assembly Language Index
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+### 44. Write an Assembly program in which a procedure converts Hexadecimal value to print its Decimal form on Screen.
+```
+.model small
+ .stack 100h
+
+ .data
+ prompt_1  db  'enter the hexadecimal number ( max 4-digit ) : $'
+ prompt_2  db  0dh,0ah, 'the equivalent 16-bit binary number is : $'
+   illegal   db  0dh,0ah,'illegal hex number. try again : $'
+
+   count     db  ?
+
+ .code
+   main proc
+     mov ax, @data                ; initialize ds
+     mov ds, ax
+
+     lea dx, prompt_1             ; load and display the string prompt_1
+     mov ah,9
+     int 21h
+
+     jmp @start                   ; jump to label @start_2
+
+     @start_1:                    ; jump label
+       lea dx, illegal            ; load and display the string illegal
+       mov ah, 9
+       int 21h
+
+     @start:                      ;
+       xor bx, bx                 ; clear bx
+       mov count, 30h             ; initialize loop counter
+
+     @start_2:                    ; jump label
+       mov ah, 1                  ; set input function
+       int 21h                    ; read a character
+
+       cmp al, 0dh                ; compare al with cr
+       jne @skip                  ; jump to label @skip if al!=cr
+
+       cmp count, 30h             ; compare count with 0
+       jbe @start_1               ; jump to label @start_1 if count<=0
+       jmp @end                   ; jump to label @end
+
+       @skip:                     ; jump label
+
+       cmp al, "a"                ; compare al with \"a\"
+       jb @decimal                ; jump to label @decimal if al<a
+
+       cmp al, "f"                ; compare al with \"f\"
+       ja @start_1                ; jump to label @start_1 if al>f
+       add al, 09h                ; add 9 to al
+       jmp @ok                    ; jump to label @ok
+
+       @decimal:                  ; jump label
+         cmp al, 30h              ; compare al with 0
+         jb @start_1              ; jump to label @start_1 if al<0
+
+         cmp al, 39h              ; compare al with 9
+         ja @start_1              ; jump to label @start_1 if al>9
+
+       @ok:                       ; jump label
+
+       inc count                  ; increment the count variable
+
+       and al, 0fh                ; convert the ascii into binary code
+
+       mov cl, 4                  ; set cl=4
+       shl al, cl                 ; shift al towards left by 4 positions
+
+       mov cx, 4                  ; set cx=4
+
+       @loop_1:                   ; loop label
+         shl al, 1                ; shift al towards left by 1 position
+         rcl bx, 1                ; rotate bx towards left by 1 position
+                                  ; through carry
+       loop @loop_1               ; jump to label @loop_1 if cx!=0
+
+      cmp count, 34h              ; compare count with 4
+      je @end                     ; jump to label @end if count=4
+      jmp @start_2                ; jump to label @start_2
+
+     @end:                        ; jump label
+
+     lea dx, prompt_2             ; load and display the string prompt_2
+     mov ah, 9
+     int 21h
+
+     mov cx, 16                   ; set cx=16
+     mov ah, 2                    ; set output function
+
+     @loop_2:                     ; loop label
+       shl bx, 1                  ; shift bx towards left by 1 position
+       jc @one                    ; jump to label @one if cf=1
+       mov dl, 30h                ; set dl=0
+       jmp @display               ; jump to label @display
+
+       @one:                      ; jump label
+         mov dl, 31h              ; set dl=1
+
+       @display:                  ; jump label
+         int 21h                  ; display a character
+     loop @loop_2                 ; jump to label @loop_2 if cx!=0
+
+     mov ah, 4ch                  ; return control to dos
+     int 21h
+   main endp
+ end main
+
+```
+
+## Input
+```
+
+```
+## Output
+```
+
+```

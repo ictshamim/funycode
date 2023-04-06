@@ -1,0 +1,54 @@
+---
+title: If the marks obtained by a student in five different subjects are input through the keyboard, find out the aggregate marks and percentage marks obtained by the student. Assume that the maximum
+slug: if-the-marks-obtained-by-a-student-in-five-different-subjects-are-input-through-the-keyboard-find-out-the-aggregate-marks-and-percentage-marks-obtained-by-the-student-assume-that-the-maximum
+category: Basic Declaration & Expression Index
+tags: ['basic']
+date: 2020-04-16
+thumbnailText: Index
+---
+
+## C Implementation
+### Program-21: If the marks obtained by a student in five different subjects are input through the keyboard, find out the aggregate marks and percentage marks obtained by the student. Assume that the maximum
+```c
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+    int hindi, math, english, science, art, total;
+    float percentage;
+    printf("Enter the marks of Hindi: ");
+    scanf("%d", &hindi);
+
+    printf("Enter the marks of Math: ");
+    scanf("%d", &math);
+
+    printf("Enter the marks of English: ");
+    scanf("%d", &english);
+
+    printf("Enter the marks of Science: ");
+    scanf("%d", &science);
+
+    printf("Enter the marks of Art: ");
+    scanf("%d", &art);
+
+    total = hindi+math+english+science+art;
+
+    percentage = total/5;
+
+    printf("\nAggregate marks: %d", total);
+    printf("\nPercentage marks: %0.2f %%", percentage);
+    getch();
+}
+```
+### Output
+```
+Enter the marks of Hindi: 60
+Enter the marks of Math: 60
+Enter the marks of English: 60
+Enter the marks of Science: 60
+Enter the marks of Art:60
+
+Aggregate marks:300
+Percentage marks:60
+```
+

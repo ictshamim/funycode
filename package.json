@@ -1,0 +1,25 @@
+{
+  "name": "elegantstack",
+  "homepage": "https://funycode.com/react/",
+  "private": true,
+  "license": "",
+  "workspaces": [
+    "packages/**",
+
+    "gatsby_eductation"],
+
+  "scripts": {
+    "clean": "lerna clean",
+    "release": "lerna version",
+    "prettier:windows": "./node_modules/.bin/prettier --write \"{packages,starters}/**/*.{jsx,js}\""
+  },
+  "devDependencies": {
+    "conventional-changelog-conventionalcommits": "^4.6.0",
+    "lerna": "^4.0.0",
+    "prettier": "^2.3.1"
+  },
+  "engines": {
+    "yarn": "^1.17.3",
+    "node": ">=12.13.0"
+  }
+}

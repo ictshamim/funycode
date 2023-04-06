@@ -1,0 +1,127 @@
+---
+title: Pure Virtual Function in Cplusplus
+category: Cplusplus Tutorial
+author: Anonymous
+tags: ['#C++', '#tutorial']
+date: 2021-01-04
+thumbnailText: C++ Tutorial-28
+---
+## Pure Virtual Function in C++
+A pure virtual function is a function which has its body set to 0 i.e., the pure virtual function does not have any body.
+
+- virtual void set ( ) =0;
+- A function declared in the above is known as pure virtual function. Here = 0 does not mean that function show is equal to 0.
+- It simply means that the virtual function show has no body.
+- The pure virtual function act as an interface and any class which inherits the class in which pure virtual function is present, has to provide the implementation for the function show.
+- Any class which contains at least a pure virtual function is termed as an abstract class.
+- An abstract class is a class whose objects cannot be created. As its objects cannot be created, this class has to be inherited by some other class.
+- The derived class must define the implementation of all the pure virtual function presents in the class.
+- If the derived class does not define all the pure virtual function than derived class also becomes abstract class.
+- It is not necessary that all functions in an abstract class must be pure virtual.
+- An abstract class may have other virtual or non-virtual functions, data members which may be used by the objects of derived classes.
+- The concept behind abstract class is to force derived classes to redefine pure virtual functions as per their requirements and features they posses.
+### Example-1: Write a C++ program to illustrate pure virtual function.
+~~~js
+//Write a C++ program to illustrate pure virtual function.
+#include<iostream>
+using namespace std;
+class first
+    {
+    public :
+    void virtual show( )=0;
+    };
+class second :public first
+    {
+    public :
+    void show( )
+        {
+        cout<<"show of second class"<<endl;
+        }
+    };
+int main( )
+    {
+    first *ptr=new second;
+    ptr->show( );
+    }
+~~~
+~~~
+Output:
+show of second class
+~~~
+
+### Example-2: Write a C++ program to illustrate pure virtual function.
+~~~js
+//Write a C++ program to illustrate pure virtual function.
+#include<iostream>
+using namespace std;
+class first
+    {
+    public :
+    void virtual show( )=0;
+    };
+class second :public first
+    {
+    public :
+    void show( )
+        {
+        cout<<"Show of second"<<endl;
+        }
+    };
+class third :public first
+    {
+    };
+int main( )
+    {
+    first *ptr=new second;
+    ptr->show( );
+    ptr=new third; // line causes error
+    ptr->show( );
+    }
+~~~
+~~~
+Output:
+error: invalid new-expression of abstract class type 'third'|
+because the following virtual functions are pure within 'third':|
+~~~
+
+### Example-3: Write a C++ program to illustrate another example pure virtual function.
+~~~js
+//Write a C++ program to illustrate another example pure virtual function.
+#include<iostream>
+using namespace std;
+class first
+    {
+    public :
+    void virtual show( )=0;
+    };
+class second :public first
+    {
+    public :
+    void show( )
+        {
+        cout<<"Show of second"<<endl;
+        }
+    };
+class third :public first
+    {
+    public :
+    void show( )
+        {
+        cout<<"Show of third"<<endl;
+        }
+    };
+int main( )
+    {
+    second s;
+    third t;
+    int i;
+    first *ptr[]= {&s,&t};
+    for(i=0; i<2; i++)
+    ptr[i]->show( );
+    }
+~~~
+~~~
+Output:
+Show of second
+Show of third
+~~~

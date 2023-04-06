@@ -1,0 +1,72 @@
+---
+title: Write an assembly language program to enter value of Al If Al contains a negative number, put -1 In Bl; if Al contains 0, put 0 In Bl; if Al contains a positive number, put 1 In Bl.·
+slug: write-an-assembly-program-to-enter-value-of-al-if-al-contains-a-negative-number-put-1-in-bl-if-al-contains-0-put-0-in-bl-if-al-contains-a-positive-number-put-1-in-bl
+category: Assembly Language Index
+tags: ['Assembly Language']
+date: 2020-04-30
+thumbnailText: Assembly Language
+---
+### 25. Write an assembly program to enter value of Al If Al contains a negative number, put -1 In Bl; if Al contains 0, put O In Bl; if Al contains a positive number, put 1 In Bl.·
+
+```
+.model small
+.stack 100h
+.data
+mg1 db
+mg2 db ?
+.code
+main proc
+
+ mov ax,@data
+ mov ds,ax
+
+ mov ah,1
+ int 21h
+ sub al,30h
+ mov mg1,al
+
+ cmp al,0
+ jl negative
+ jg positive
+ jz zero
+
+ negative:
+ mov ah,2
+ mov bl,-1
+ add bl,30h
+ mov dl,bl
+ int 21h
+ jmp exit
+
+ positive:
+ mov ah,2
+ mov bl,1
+ add bl,30h
+ mov dl,bl
+ int 21h
+ jmp exit
+
+ zero:
+ mov ah,2
+ mov bl,0
+ add bl,30h
+ mov dl,bl
+ int 21h
+ jmp exit
+
+ exit:
+ mov ah,4ch
+ int 21h
+
+ main endp
+ end main
+```
+
+## Input
+```
+5
+```
+## Output
+```
+1
+```
